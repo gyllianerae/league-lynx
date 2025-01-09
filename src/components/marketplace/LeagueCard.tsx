@@ -1,0 +1,170 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Trophy, Users, CalendarDays } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { useAuthState } from "@/hooks/useAuthState";
+import { UserAvatar } from "@/components/auth/verification/UserAvatar";
+import { CommissionerActions } from "./CommissionerActions";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import { MarketplaceListing } from "@/types/database/marketplace-league";
+
+interface LeagueCardProps {
+  league: MarketplaceListing;
+}
+
+export const LeagueCard = ({ league }: LeagueCardProps) => {
+  const navigate = useNavigate();
+  const { isAuthenticated, user } = useAuthState();
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
+  const isCommissioner = user?.id === league.commissioner.user_id;
+
+  const deleteLeagueMutation = useMutation({
+    mutationFn: async () => {
+      const { error } = await supabase
+        .from('marketplace_listings')
+        .delete()
+        .eq('id', league.id);
+
+      if (error) throw error;
+      return league.id;
+    },
+    onMutate: async (leagueId) => {
+      // Cancel any outgoing refetches
+      await queryClient.cancelQueries({ queryKey: ['marketplace-listings'] });
+
+      // Snapshot the previous value
+      const previousLeagues = queryClient.getQueryData(['marketplace-listings']);
+
+      // Optimistically remove the league from the cache
+      queryClient.setQueryData(['marketplace-listings'], (old: MarketplaceListing[] = []) => {
+        return old.filter(l => l.id !== league.id);
+      });
+
+      return { previousLeagues };
+    },
+    onError: (err, variables, context) => {
+      // If the mutation fails, use the context returned from onMutate to roll back
+      queryClient.setQueryData(['marketplace-listings'], context?.previousLeagues);
+      toast({
+        title: "Error",
+        description: "Failed to delete league. Please try again.",
+        variant: "destructive",
+      });
+    },
+    onSuccess: () => {
+      toast({
+        title: "Success!",
+        description: "League has been deleted.",
+      });
+    },
+    onSettled: () => {
+      // Always refetch after error or success to ensure cache is in sync with server
+      queryClient.invalidateQueries({ queryKey: ['marketplace-listings'] });
+    },
+  });
+
+  const handleViewDetails = () => {
+    if (isAuthenticated) {
+      navigate(`/marketplace/${league.id}`);
+    }
+  };
+
+  return (
+    <Card className="bg-forest-light/30 border-mint/10 backdrop-blur-sm overflow-hidden">
+      <div 
+        className="h-48 w-full bg-cover bg-center"
+        style={{ backgroundImage: league.image ? `url(${league.image})` : 'none' }}
+      />
+      <div className="p-6 space-y-4">
+        <div className="flex items-start justify-between">
+          <div>
+            <h3 className="text-xl font-semibold text-white mb-1 text-left">{league.title}</h3>
+            {league.commissioner && (
+              <UserAvatar user={league.commissioner} />
+            )}
+          </div>
+          <div className="flex items-start gap-2">
+            <div className="bg-mint/10 px-3 py-1 rounded-full">
+              <span className="text-mint text-sm">{league.season} Season</span>
+            </div>
+            {isCommissioner && (
+              <CommissionerActions 
+                league={league}
+                onDelete={() => deleteLeagueMutation.mutate()}
+              />
+            )}
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex items-center gap-2 text-white/60">
+            <Trophy className="h-4 w-4" />
+            <span>${league.prize_pool} Prize Pool</span>
+          </div>
+          <div className="flex items-center gap-2 text-white/60">
+            <Users className="h-4 w-4" />
+            <span>{league.filled_spots}/{league.total_spots} Teams</span>
+          </div>
+          <div className="flex items-center gap-2 text-white/60">
+            <CalendarDays className="h-4 w-4" />
+            <span>Draft: {new Date(league.draft_date || '').toLocaleDateString()}</span>
+          </div>
+        </div>
+
+        <div className="pt-4">
+          {isAuthenticated ? (
+            <Button 
+              className="w-full bg-mint hover:bg-mint/90 text-forest"
+              onClick={handleViewDetails}
+            >
+              View Details
+            </Button>
+          ) : (
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button className="w-full bg-mint hover:bg-mint/90 text-forest">
+                  View Details
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent className="bg-forest-light border-mint/10">
+                <AlertDialogHeader>
+                  <AlertDialogTitle className="text-mint">Sign in Required</AlertDialogTitle>
+                  <AlertDialogDescription className="text-white/60">
+                    You need to sign in or create an account to view league details.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel className="bg-forest-light text-mint hover:bg-forest-light/80">
+                    Cancel
+                  </AlertDialogCancel>
+                  <AlertDialogAction 
+                    className="bg-mint text-forest hover:bg-mint/90"
+                    onClick={() => navigate('/auth')}
+                  >
+                    Sign In
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          )}
+        </div>
+      </div>
+    </Card>
+  );
+};

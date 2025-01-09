@@ -1,0 +1,4 @@
+project_id = "jjvtxiaalguxcgvtocqr"
+
+[functions.fetch-user-leagues]
+verify_jwt = true
