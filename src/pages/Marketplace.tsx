@@ -13,7 +13,7 @@ import { mockLeagues } from "@/data/mockLeagues";
 const MarketplacePage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sportFilter, setSportFilter] = useState("all");
-  const [seasonFilter, setSeasonFilter] = useState(new Date().getFullYear().toString());
+  const [seasonFilter, setSeasonFilter] = useState("all");
   const { isAuthenticated, user } = useAuthState();
 
   const { data: profile } = useQuery({
