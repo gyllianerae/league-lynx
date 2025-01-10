@@ -16,6 +16,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { TopNav } from "@/components/TopNav";
 import './App.css';
+import Community from './pages/Community';
 
 const queryClient = new QueryClient();
 
@@ -147,6 +148,18 @@ function App() {
                   isAuthenticated ? (
                     <AuthenticatedLayout>
                       <Transactions />
+                    </AuthenticatedLayout>
+                  ) : (
+                    <Navigate to="/auth" />
+                  )
+                }
+              />
+              <Route
+                path="/community"
+                element={
+                  isAuthenticated ? (
+                    <AuthenticatedLayout>
+                      <Community />
                     </AuthenticatedLayout>
                   ) : (
                     <Navigate to="/auth" />

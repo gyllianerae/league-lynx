@@ -1,4 +1,4 @@
-import { LayoutGrid, Users, Trophy, History, LogOut, Store } from "lucide-react";
+import { LayoutGrid, Users, Trophy, History, LogOut, Store, Globe } from "lucide-react";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -55,6 +55,11 @@ const getMenuItems = (role: UserRole) => [
     path: "/transactions",
     dynamicPath: true,
   },
+  {
+    title: "Community",
+    icon: Globe,
+    path: "/community",
+  }
 ];
 
 export function AppSidebar() {

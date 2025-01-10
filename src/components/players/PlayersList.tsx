@@ -1,7 +1,9 @@
 import { SleeperPlayer } from "@/types/sleeper/player";
 import { PlayerCard } from "./PlayerCard";
 import { Skeleton } from "@/components/ui/skeleton";
-import { UsersRound } from "lucide-react";
+import { Star, UsersRound } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 interface PlayersListProps {
   players: SleeperPlayer[];
@@ -11,6 +13,40 @@ interface PlayersListProps {
 }
 
 export const PlayersList = ({ players, onPlayerClick, isLoading, viewMode = "leagues" }: PlayersListProps) => {
+  const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [sortedPlayers, setSortedPlayers] = useState<SleeperPlayer[]>([]);
+
+  useEffect(() => {
+    // Load favorites from localStorage on component mount
+    const savedFavorites = localStorage.getItem('favoritePlayerIds');
+    if (savedFavorites) {
+      setFavorites(new Set(JSON.parse(savedFavorites)));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Sort players with favorites at the top
+    const sorted = [...players].sort((a, b) => {
+      const aIsFavorite = favorites.has(a.player_id);
+      const bIsFavorite = favorites.has(b.player_id);
+      if (aIsFavorite && !bIsFavorite) return -1;
+      if (!aIsFavorite && bIsFavorite) return 1;
+      return 0;
+    });
+    setSortedPlayers(sorted);
+  }, [players, favorites]);
+
+  const toggleFavorite = (playerId: string) => {
+    const newFavorites = new Set(favorites);
+    if (newFavorites.has(playerId)) {
+      newFavorites.delete(playerId);
+    } else {
+      newFavorites.add(playerId);
+    }
+    setFavorites(newFavorites);
+    localStorage.setItem('favoritePlayerIds', JSON.stringify([...newFavorites]));
+  };
+
   if (isLoading) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -43,13 +79,31 @@ export const PlayersList = ({ players, onPlayerClick, isLoading, viewMode = "lea
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {players.map((player) => (
-        <PlayerCard
-          key={player.player_id}
-          player={player}
-          onClick={() => onPlayerClick(player)}
-          viewMode={viewMode}
-        />
+      {sortedPlayers.map((player) => (
+        <div key={player.player_id} className="relative">
+          <PlayerCard
+            player={player}
+            onClick={() => onPlayerClick(player)}
+            viewMode={viewMode}
+          />
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute top-2 right-2"
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleFavorite(player.player_id);
+            }}
+          >
+            <Star
+              className={`h-5 w-5 ${
+                favorites.has(player.player_id)
+                  ? "text-yellow-400 fill-yellow-400"
+                  : "text-white/60 hover:text-white/80"
+              }`}
+            />
+          </Button>
+        </div>
       ))}
     </div>
   );

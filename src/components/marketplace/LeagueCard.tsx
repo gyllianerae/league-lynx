@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Trophy, Users, CalendarDays } from "lucide-react";
+import { Trophy, Users, CalendarDays, Shield } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -31,6 +31,7 @@ export const LeagueCard = ({ league }: LeagueCardProps) => {
   const { isAuthenticated, user } = useAuthState();
   const queryClient = useQueryClient();
   const { toast } = useToast();
+  const [imageError, setImageError] = useState(false);
 
   const isCommissioner = user?.id === league.commissioner.user_id;
 
@@ -45,21 +46,14 @@ export const LeagueCard = ({ league }: LeagueCardProps) => {
       return league.id;
     },
     onMutate: async (leagueId) => {
-      // Cancel any outgoing refetches
       await queryClient.cancelQueries({ queryKey: ['marketplace-listings'] });
-
-      // Snapshot the previous value
       const previousLeagues = queryClient.getQueryData(['marketplace-listings']);
-
-      // Optimistically remove the league from the cache
       queryClient.setQueryData(['marketplace-listings'], (old: MarketplaceListing[] = []) => {
         return old.filter(l => l.id !== league.id);
       });
-
       return { previousLeagues };
     },
     onError: (err, variables, context) => {
-      // If the mutation fails, use the context returned from onMutate to roll back
       queryClient.setQueryData(['marketplace-listings'], context?.previousLeagues);
       toast({
         title: "Error",
@@ -74,7 +68,6 @@ export const LeagueCard = ({ league }: LeagueCardProps) => {
       });
     },
     onSettled: () => {
-      // Always refetch after error or success to ensure cache is in sync with server
       queryClient.invalidateQueries({ queryKey: ['marketplace-listings'] });
     },
   });
@@ -85,12 +78,31 @@ export const LeagueCard = ({ league }: LeagueCardProps) => {
     }
   };
 
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
   return (
     <Card className="bg-forest-light/30 border-mint/10 backdrop-blur-sm overflow-hidden">
       <div 
-        className="h-48 w-full bg-cover bg-center"
-        style={{ backgroundImage: league.image ? `url(${league.image})` : 'none' }}
-      />
+        className="h-48 w-full bg-cover bg-center relative"
+        style={{ 
+          backgroundImage: !imageError && league.image ? `url(${league.image})` : 'none',
+          backgroundColor: imageError || !league.image ? 'rgba(0, 255, 179, 0.05)' : 'transparent'
+        }}
+      >
+        {(imageError || !league.image) && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Shield className="w-20 h-20 text-mint/20" />
+          </div>
+        )}
+        {league.image && <img 
+          src={league.image} 
+          alt={league.title}
+          className="hidden"
+          onError={handleImageError}
+        />}
+      </div>
       <div className="p-6 space-y-4">
         <div className="flex items-start justify-between">
           <div>

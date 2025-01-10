@@ -41,6 +41,11 @@ export const PlayerCard = ({ player, onClick, viewMode = "leagues" }: PlayerCard
         return 'text-gray-400';
     }
   };
+
+  // Construct the image URL based on player ID
+  const getPlayerImageUrl = (playerId: string) => {
+    return `https://sleepercdn.com/content/nfl/players/${playerId}.jpg`;
+  };
   
   return (
     <Card
@@ -51,7 +56,7 @@ export const PlayerCard = ({ player, onClick, viewMode = "leagues" }: PlayerCard
         <div className="relative">
           <Avatar className="w-16 h-16">
             <AvatarImage
-              src={player.image_url}
+              src={getPlayerImageUrl(player.player_id)}
               alt={playerName}
               className="object-cover bg-forest"
             />

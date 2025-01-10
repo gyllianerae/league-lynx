@@ -47,12 +47,22 @@ export const TeamOverview = ({ leagues, isLoading }: TeamOverviewProps) => {
               <TableBody>
                 {[...Array(5)].map((_, index) => (
                   <TableRow key={index} className="border-none">
-                    <TableCell><Skeleton className="h-4 w-32" /></TableCell>
-                    <TableCell><Skeleton className="h-4 w-24" /></TableCell>
-                    <TableCell><Skeleton className="h-4 w-16" /></TableCell>
-                    <TableCell><Skeleton className="h-4 w-20" /></TableCell>
-                    <TableCell className="text-right"><Skeleton className="h-4 w-16 ml-auto" /></TableCell>
-                    <TableCell className="text-right"><Skeleton className="h-4 w-16 ml-auto" /></TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <Skeleton className="h-6 w-6 rounded-full bg-forest-light/50" />
+                        <Skeleton className="h-4 w-32 bg-forest-light/50" />
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <Skeleton className="h-6 w-6 rounded-full bg-forest-light/50" />
+                        <Skeleton className="h-4 w-24 bg-forest-light/50" />
+                      </div>
+                    </TableCell>
+                    <TableCell><Skeleton className="h-4 w-16 bg-forest-light/50" /></TableCell>
+                    <TableCell><Skeleton className="h-4 w-20 bg-forest-light/50" /></TableCell>
+                    <TableCell className="text-right"><Skeleton className="h-4 w-16 ml-auto bg-forest-light/50" /></TableCell>
+                    <TableCell className="text-right"><Skeleton className="h-4 w-16 ml-auto bg-forest-light/50" /></TableCell>
                   </TableRow>
                 ))}
               </TableBody>
