@@ -30,13 +30,38 @@ export function ProfileSettingsDialog({ open, onOpenChange }: ProfileSettingsDia
 
   useEffect(() => {
     const fetchCurrentRole = async () => {
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('role')
-        .single();
-      
-      if (profile?.role) {
-        setRole(profile.role);
+      try {
+        const {
+          data: { user },
+          error: userError,
+        } = await supabase.auth.getUser();
+
+        if (userError) {
+          console.error("Error fetching user ID:", userError);
+          return;
+        }
+
+        if (user?.id) {
+          const { data: profile, error } = await supabase
+            .from("profiles")
+            .select("role")
+            .eq("id", user.id) // Fetch only for the authenticated user
+            .single(); // Expect a single result
+
+          if (error) {
+            console.error("Error fetching role:", error);
+            return;
+          }
+
+          if (profile?.role) {
+            setRole(profile.role); // Set role to the current value
+            console.log("Fetched User Role:", profile.role); // Debug log
+          } else {
+            console.warn("User role not found, defaulting to regular_user");
+          }
+        }
+      } catch (error) {
+        console.error("Error in fetchCurrentRole:", error);
       }
     };
 
@@ -48,19 +73,29 @@ export function ProfileSettingsDialog({ open, onOpenChange }: ProfileSettingsDia
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+
+      if (userError) {
+        toast.error("Error getting authenticated user");
+        return;
+      }
+
       const { error } = await supabase
         .from("profiles")
         .update({ role })
-        .eq("id", (await supabase.auth.getUser()).data.user?.id);
+        .eq("id", user?.id); // Update role based on authenticated user ID
 
       if (error) throw error;
 
       toast.success("Profile updated successfully!");
       onOpenChange(false);
-      window.location.reload(); // Refresh to update sidebar text
+      window.location.reload(); // Refresh to reflect sidebar changes
     } catch (error: any) {
       console.error("Update error:", error);
-      toast.error(error.message);
+      toast.error(error.message || "Error updating profile");
     } finally {
       setIsLoading(false);
     }
@@ -81,7 +116,7 @@ export function ProfileSettingsDialog({ open, onOpenChange }: ProfileSettingsDia
               <SelectTrigger className="w-full bg-forest-dark/50 border-mint/20 text-mint">
                 <SelectValue placeholder="Select your role" />
               </SelectTrigger>
-              <SelectContent 
+              <SelectContent
                 className="bg-forest-light/100 text-mint border border-mint/10 rounded-md"
                 position="popper"
                 sideOffset={5}

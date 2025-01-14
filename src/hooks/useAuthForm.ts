@@ -31,7 +31,10 @@ export const useAuthForm = ({ isSignUp, onSubmit }: UseAuthFormProps) => {
   const [formData, setFormData] = useState<AuthFormData | null>(null);
   const { toast } = useToast();
 
-  const handleVerificationConfirm = async (sleeperUser: SleeperUser) => {
+  const handleVerificationConfirm = async (
+    sleeperUser: SleeperUser, 
+    preferences: { role: "regular_user" | "commissioner"; season: string }
+  ) => {
     if (!formData) {
       console.error("No form data found");
       return;
@@ -48,6 +51,20 @@ export const useAuthForm = ({ isSignUp, onSubmit }: UseAuthFormProps) => {
 
       // Wait for the profile to be created by the database trigger
       await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // Update the user's profile with role and selected season
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .update({ 
+          role: preferences.role,
+          selected_season: preferences.season,
+          onboarding_status: 'completed'
+        })
+        .eq('id', result.user.id);
+
+      if (profileError) {
+        throw profileError;
+      }
 
       console.log("Starting Sleeper data sync for user:", result.user.id);
       await syncSleeperData(result.user.id, sleeperUser);

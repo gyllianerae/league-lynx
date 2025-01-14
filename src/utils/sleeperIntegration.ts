@@ -111,6 +111,15 @@ export const handleSleeperIntegration = async (userId: string, sleeperUsername: 
 
     return platformUser;
   } catch (error: any) {
+    // Suppress toast for duplicate key error
+    if (
+      error?.code === "23505" &&
+      error?.message.includes("duplicate key value violates unique constraint")
+    ) {
+      console.warn('Duplicate key error suppressed:', error);
+      return; // Exit without showing toast
+    }
+
     console.error('Error in Sleeper integration:', error);
     toast.error(error.message || "Failed to integrate with Sleeper");
     throw error;

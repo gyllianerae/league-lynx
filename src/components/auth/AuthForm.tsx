@@ -7,6 +7,8 @@ import { SleeperIntegration } from "./SleeperIntegration";
 import { AuthFormSubmit } from "./AuthFormSubmit";
 import { SleeperVerificationDialog } from "./SleeperVerificationDialog";
 import { EmailField } from "./EmailField";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useState } from "react";
 
 interface AuthFormProps {
   isSignUp: boolean;
@@ -20,6 +22,7 @@ interface AuthFormProps {
 }
 
 export const AuthForm = ({ isSignUp, onSubmit }: AuthFormProps) => {
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const {
     firstName,
     setFirstName,
@@ -40,9 +43,17 @@ export const AuthForm = ({ isSignUp, onSubmit }: AuthFormProps) => {
 
   const { password, passwordError, handlePasswordChange } = usePasswordValidation();
 
+  const onSubmitWrapper = (e: React.FormEvent) => {
+    if (isSignUp && !acceptedTerms) {
+      e.preventDefault();
+      return;
+    }
+    handleSubmit(e);
+  };
+
   return (
     <>
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={onSubmitWrapper} className="space-y-6">
         {isSignUp && (
           <>
             <UserInfoFields
@@ -74,10 +85,27 @@ export const AuthForm = ({ isSignUp, onSubmit }: AuthFormProps) => {
           error={passwordError}
         />
 
+        {isSignUp && (
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="terms"
+              checked={acceptedTerms}
+              onCheckedChange={(checked) => setAcceptedTerms(checked as boolean)}
+              className="border-mint/20 data-[state=checked]:bg-mint data-[state=checked]:text-forest"
+            />
+            <label
+              htmlFor="terms"
+              className="text-sm text-mint/80 cursor-pointer"
+            >
+              I agree to the Terms and Conditions
+            </label>
+          </div>
+        )}
+
         <AuthFormSubmit
           isLoading={isLoading}
           isSignUp={isSignUp}
-          isDisabled={!!passwordError}
+          isDisabled={isSignUp ? (!!passwordError || !acceptedTerms) : !!passwordError}
         />
       </form>
 

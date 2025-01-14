@@ -2,8 +2,10 @@ import { SleeperPlayer } from "@/types/sleeper/player";
 import { PlayerCard } from "./PlayerCard";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Star, UsersRound } from "lucide-react";
-import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 interface PlayersListProps {
   players: SleeperPlayer[];
@@ -13,38 +15,56 @@ interface PlayersListProps {
 }
 
 export const PlayersList = ({ players, onPlayerClick, isLoading, viewMode = "leagues" }: PlayersListProps) => {
-  const [favorites, setFavorites] = useState<Set<string>>(new Set());
-  const [sortedPlayers, setSortedPlayers] = useState<SleeperPlayer[]>([]);
+  const queryClient = useQueryClient();
+  
+  // Fetch favorite players
+  const { data: favorites = [] } = useQuery({
+    queryKey: ['favorite-players-ids'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('favorite_players')
+        .select('player_id');
 
-  useEffect(() => {
-    // Load favorites from localStorage on component mount
-    const savedFavorites = localStorage.getItem('favoritePlayerIds');
-    if (savedFavorites) {
-      setFavorites(new Set(JSON.parse(savedFavorites)));
+      if (error) {
+        console.error('Error fetching favorites:', error);
+        return [];
+      }
+
+      return data.map(f => f.player_id);
+    },
+  });
+
+  const toggleFavorite = async (playerId: string) => {
+    const isFavorite = favorites.includes(playerId);
+
+    try {
+      if (isFavorite) {
+        const { error } = await supabase
+          .from('favorite_players')
+          .delete()
+          .eq('player_id', playerId);
+
+        if (error) throw error;
+      } else {
+        const { error } = await supabase
+          .from('favorite_players')
+          .insert({ 
+            player_id: playerId,
+            user_id: (await supabase.auth.getUser()).data.user?.id 
+          });
+
+        if (error) throw error;
+      }
+
+      // Invalidate queries to refresh the data
+      queryClient.invalidateQueries({ queryKey: ['favorite-players'] });
+      queryClient.invalidateQueries({ queryKey: ['favorite-players-ids'] });
+
+      toast.success(isFavorite ? 'Player removed from favorites' : 'Player added to favorites');
+    } catch (error) {
+      console.error('Error toggling favorite:', error);
+      toast.error('Failed to update favorites');
     }
-  }, []);
-
-  useEffect(() => {
-    // Sort players with favorites at the top
-    const sorted = [...players].sort((a, b) => {
-      const aIsFavorite = favorites.has(a.player_id);
-      const bIsFavorite = favorites.has(b.player_id);
-      if (aIsFavorite && !bIsFavorite) return -1;
-      if (!aIsFavorite && bIsFavorite) return 1;
-      return 0;
-    });
-    setSortedPlayers(sorted);
-  }, [players, favorites]);
-
-  const toggleFavorite = (playerId: string) => {
-    const newFavorites = new Set(favorites);
-    if (newFavorites.has(playerId)) {
-      newFavorites.delete(playerId);
-    } else {
-      newFavorites.add(playerId);
-    }
-    setFavorites(newFavorites);
-    localStorage.setItem('favoritePlayerIds', JSON.stringify([...newFavorites]));
   };
 
   if (isLoading) {
@@ -79,7 +99,7 @@ export const PlayersList = ({ players, onPlayerClick, isLoading, viewMode = "lea
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {sortedPlayers.map((player) => (
+      {players.map((player) => (
         <div key={player.player_id} className="relative">
           <PlayerCard
             player={player}
@@ -97,7 +117,7 @@ export const PlayersList = ({ players, onPlayerClick, isLoading, viewMode = "lea
           >
             <Star
               className={`h-5 w-5 ${
-                favorites.has(player.player_id)
+                favorites.includes(player.player_id)
                   ? "text-yellow-400 fill-yellow-400"
                   : "text-white/60 hover:text-white/80"
               }`}

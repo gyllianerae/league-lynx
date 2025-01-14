@@ -57,7 +57,9 @@ export const syncLeague = async (
 
     return insertedLeague;
   } catch (error: any) {
-    console.error('Error syncing league:', error);
+    if (!(error?.code === "23505" && error?.message?.includes("unique constraint"))) {
+        console.error('Error syncing league:', error);
+    }  
     throw error;
   }
 };

@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowLeft, Flag, School, Ruler, Weight, Hash } from "lucide-react";
+import { ArrowLeft, Flag, School, Ruler, Weight, Hash, Check, X } from "lucide-react";
 import { PerformanceChart } from "./profile/PerformanceChart";
 import { PriceChart } from "./profile/PriceChart";
 import { PlayerStats } from "./profile/PlayerStats";
@@ -25,6 +25,64 @@ export function PlayerProfile() {
 
       if (error) throw error;
       return data;
+    },
+  });
+
+  // Fetch user's leagues to check player availability
+  const { data: leagues, isLoading: isLoadingLeagues } = useQuery({
+    queryKey: ['user-leagues'],
+    queryFn: async () => {
+      const { data: platformUsers } = await supabase
+        .from('platform_users')
+        .select('id');
+
+      if (!platformUsers?.length) return [];
+
+      const { data: leagues } = await supabase
+        .from('leagues')
+        .select('*, platform_users(*)');
+
+      return leagues || [];
+    },
+  });
+
+  // Fetch rosters for each league
+  const { data: leagueAvailability, isLoading: isLoadingRosters } = useQuery({
+    queryKey: ['league-rosters', playerId, leagues],
+    enabled: !!leagues?.length,
+    queryFn: async () => {
+      if (!leagues) return [];
+
+      const availability = await Promise.all(
+        leagues.map(async (league) => {
+          const response = await fetch(
+            `https://api.sleeper.app/v1/league/${league.league_id}/rosters`
+          );
+          const rosters = await response.json();
+
+          // Get league users to match with rosters
+          const usersResponse = await fetch(
+            `https://api.sleeper.app/v1/league/${league.league_id}/users`
+          );
+          const users = await usersResponse.json();
+
+          const rosterWithPlayer = rosters.find((roster: any) => 
+            roster.players?.includes(playerId)
+          );
+
+          const owner = rosterWithPlayer 
+            ? users.find((user: any) => user.user_id === rosterWithPlayer.owner_id)
+            : null;
+
+          return {
+            league_name: league.name,
+            is_available: !rosterWithPlayer,
+            owner_name: owner?.display_name || owner?.username || 'Unknown Owner'
+          };
+        })
+      );
+
+      return availability;
     },
   });
 
@@ -165,6 +223,50 @@ export function PlayerProfile() {
         <div className="col-span-12 lg:col-span-4">
           <Card className="bg-forest-light/50 backdrop-blur-xl p-6 border border-mint/10 hover:border-mint/20 transition-all duration-300 shadow-lg h-full">
             <PlayerStats player={player} showQuickStatsOnly={true} />
+          </Card>
+        </div>
+
+        {/* League Availability Card */}
+        <div className="col-span-12">
+          <Card className="bg-forest-light/50 backdrop-blur-xl p-6 border border-mint/10 hover:border-mint/20 transition-all duration-300 shadow-lg">
+            <h2 className="text-xl font-semibold text-mint mb-6 flex items-center gap-2">
+              League Availability
+            </h2>
+            {isLoadingLeagues || isLoadingRosters ? (
+              <div className="space-y-4">
+                {[1, 2, 3].map((i) => (
+                  <Skeleton key={i} className="h-16 w-full" />
+                ))}
+              </div>
+            ) : leagueAvailability?.length ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {leagueAvailability.map((league, index) => (
+                  <div 
+                    key={index}
+                    className="p-4 rounded-lg bg-forest-light/30 border border-mint/10 hover:border-mint/20 transition-all group"
+                  >
+                    <div className="font-medium text-white mb-2">{league.league_name}</div>
+                    <div className="flex items-center gap-2 text-sm">
+                      {league.is_available ? (
+                        <>
+                          <Check className="h-4 w-4 text-green-400" />
+                          <span className="text-green-400">Available</span>
+                        </>
+                      ) : (
+                        <>
+                          <X className="h-4 w-4 text-red-400" />
+                          <span className="text-white/60">Owned by {league.owner_name}</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-8 text-white/60">
+                No leagues found. Join or create a league to track player availability.
+              </div>
+            )}
           </Card>
         </div>
 

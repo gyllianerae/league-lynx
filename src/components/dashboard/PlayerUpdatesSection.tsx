@@ -7,6 +7,24 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+type PlayerNews = {
+  strEvent: string;
+  strDescriptionEN: string;
+  dateEvent: string;
+  strTimeLocal: string;
+  strHomeTeam: string;
+  strAwayTeam: string;
+  intHomeScore: string;
+  intAwayScore: string;
+  strHomeTeamBadge: string;
+  strAwayTeamBadge: string;
+  strVenue: string;
+  strLeague: string;
+  strThumb?: string;
+  strVideo?: string;
+};
 
 interface PlayerUpdatesSectionProps {
   players: SleeperPlayer[] | null;
@@ -60,6 +78,28 @@ export const PlayerUpdatesSection = ({ players }: PlayerUpdatesSectionProps) => 
       return playerIds;
     },
     enabled: !!leagues?.length
+  });
+
+  // Fetch news data
+  const { data: playerNews, isLoading: isNewsLoading } = useQuery({
+    queryKey: ["player-news"],
+    queryFn: async () => {
+      try {
+        const response = await fetch(
+          "https://www.thesportsdb.com/api/v1/json/3/eventslast.php?id=133602"
+        );
+
+        if (!response.ok) {
+          throw new Error(`TheSportsDB API Error: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data.results || [];
+      } catch (error) {
+        console.error("Error fetching player news:", error);
+        return [];
+      }
+    },
   });
 
   const getInjuryBadgeColor = (injury: string) => {
@@ -119,64 +159,139 @@ export const PlayerUpdatesSection = ({ players }: PlayerUpdatesSectionProps) => 
       </CardHeader>
 
       <CardContent className="p-4">
-        <ScrollArea className="h-[500px]">
-          <div className="space-y-4">
-            {filteredPlayers?.length === 0 && (
-              <div className="text-center text-gray-400 py-4">
-                No updates for your players
-              </div>
-            )}
-            {filteredPlayers?.map((player) => (
-              <Card 
-                key={player.player_id} 
-                className="bg-forest-light/50 border-mint/10 backdrop-blur-xl cursor-pointer hover:bg-forest-light/60 transition-colors"
-                onClick={() => navigate(`/players/profile/${player.player_id}`)}
-              >
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-4">
-                    <Avatar className="h-12 w-12 rounded-lg">
-                      <AvatarImage src={player.image_url} />
-                    </Avatar>
-                    
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <span className="text-lg font-semibold text-white">
-                          {player.full_name}
-                        </span>
-                        <span className={`text-sm font-medium ${getPositionColor(player.position || '')}`}>
-                          {player.position}
-                        </span>
+        <Tabs defaultValue="status" className="w-full">
+          <TabsList className="bg-forest-light/30">
+            <TabsTrigger value="status">Status Updates</TabsTrigger>
+            <TabsTrigger value="news">Latest News</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="status">
+            <ScrollArea className="h-[500px]">
+              <div className="space-y-4">
+                {filteredPlayers?.length === 0 && (
+                  <div className="text-center text-gray-400 py-4">
+                    No updates for your players
+                  </div>
+                )}
+                {filteredPlayers?.map((player) => (
+                  <Card 
+                    key={player.player_id} 
+                    className="bg-forest-light/50 border-mint/10 backdrop-blur-xl cursor-pointer hover:bg-forest-light/60 transition-colors"
+                    onClick={() => navigate(`/players/profile/${player.player_id}`)}
+                  >
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-4">
+                        <Avatar className="h-12 w-12 rounded-lg">
+                          <AvatarImage src={player.image_url} />
+                        </Avatar>
+                        
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2">
+                            <span className="text-lg font-semibold text-white">
+                              {player.full_name}
+                            </span>
+                            <span className={`text-sm font-medium ${getPositionColor(player.position || '')}`}>
+                              {player.position}
+                            </span>
+                          </div>
+                          
+                          <div className="flex items-center gap-2 text-sm text-gray-400">
+                            <span>{player.team || 'Free Agent'}</span>
+                            {player.number && (
+                              <>
+                                <span className="text-gray-600">•</span>
+                                <span>#{player.number}</span>
+                              </>
+                            )}
+                          </div>
+                        </div>
                       </div>
-                      
-                      <div className="flex items-center gap-2 text-sm text-gray-400">
-                        <span>{player.team || 'Free Agent'}</span>
-                        {player.number && (
-                          <>
-                            <span className="text-gray-600">•</span>
-                            <span>#{player.number}</span>
-                          </>
+
+                      <div className="mt-3 flex gap-2">
+                        {player.injury_status && (
+                          <Badge variant="outline" className={`${getInjuryBadgeColor(player.injury_status)}`}>
+                            Injury: {player.injury_status}
+                          </Badge>
+                        )}
+                        {player.status === 'Inactive' && (
+                          <Badge variant="outline" className="bg-yellow-900/50 text-yellow-400">
+                            Status: Inactive
+                          </Badge>
                         )}
                       </div>
-                    </div>
-                  </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </ScrollArea>
+          </TabsContent>
 
-                  <div className="mt-3 flex gap-2">
-                    {player.injury_status && (
-                      <Badge variant="outline" className={`${getInjuryBadgeColor(player.injury_status)}`}>
-                        Injury: {player.injury_status}
-                      </Badge>
-                    )}
-                    {player.status === 'Inactive' && (
-                      <Badge variant="outline" className="bg-yellow-900/50 text-yellow-400">
-                        Status: Inactive
-                      </Badge>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </ScrollArea>
+          <TabsContent value="news">
+            <ScrollArea className="h-[500px] pr-4">
+              {!playerNews || playerNews.length === 0 ? (
+                <div className="text-center text-gray-400 py-4">No news available at the moment</div>
+              ) : (
+                playerNews.map((news: PlayerNews, index: number) => (
+                  <Card key={index} className="bg-forest-light/50 border-mint/10 backdrop-blur-xl mb-4">
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-4">
+                        <img
+                          src={news.strThumb || "/default-thumbnail.png"}
+                          alt="News Thumbnail"
+                          className="h-16 w-16 rounded-lg object-cover"
+                        />
+                        <div className="flex-1">
+                          <h3 className="text-lg font-semibold text-white">{news.strEvent}</h3>
+                          <p className="text-gray-400 text-sm">
+                            {news.strDescriptionEN || "No additional description provided."}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="mt-3 flex items-center justify-between">
+                        <div className="text-xs text-gray-400">
+                          {news.strLeague} - {news.strVenue} at {news.strTimeLocal}
+                        </div>
+                        <div className="text-xs flex items-center gap-4">
+                          <div className="flex items-center gap-1">
+                            <img
+                              src={news.strHomeTeamBadge}
+                              alt="Home Team Badge"
+                              className="h-8 w-8 rounded-full"
+                            />
+                            <span className="text-white font-semibold">{news.strHomeTeam}</span>
+                            <span className="text-white">({news.intHomeScore || "N/A"})</span>
+                          </div>
+                          <span className="text-mint/80 font-bold">vs</span>
+                          <div className="flex items-center gap-1">
+                            <img
+                              src={news.strAwayTeamBadge}
+                              alt="Away Team Badge"
+                              className="h-8 w-8 rounded-full"
+                            />
+                            <span className="text-white font-semibold">{news.strAwayTeam}</span>
+                            <span className="text-white">({news.intAwayScore || "N/A"})</span>
+                          </div>
+                        </div>
+                      </div>
+                      {news.strVideo && (
+                        <div className="mt-2">
+                          <a
+                            href={news.strVideo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs text-mint hover:underline"
+                          >
+                            🎥 Watch Video Highlights
+                          </a>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                ))
+              )}
+            </ScrollArea>
+          </TabsContent>
+        </Tabs>
       </CardContent>
     </Card>
   );

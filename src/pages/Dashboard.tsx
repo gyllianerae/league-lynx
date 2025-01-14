@@ -4,6 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useLeagues } from '@/hooks/useLeagues';
 import { useQuery } from '@tanstack/react-query';
 import { TeamOverview } from '@/components/dashboard/TeamOverview';
+import { CommissionerDashboard } from '@/components/dashboard/CommissionerDashboard';
 import { PlayerUpdatesSection } from '@/components/dashboard/PlayerUpdatesSection';
 import { MyPlayersSection } from '@/components/dashboard/MyPlayersSection';
 import { YearSelector } from '@/components/dashboard/YearSelector';
@@ -25,6 +26,24 @@ const DashboardPage = () => {
   const [selectedYear, setSelectedYear] = useState('2025');
   const { leagues: allLeagues, isLoading: isLeaguesLoading } = useLeagues();
   const leagues = allLeagues?.filter(league => league.season === selectedYear);
+
+  // Query for user role
+  const { data: profile } = useQuery({
+    queryKey: ['user-profile'],
+    queryFn: async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session?.user) return null;
+
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', session.user.id)
+        .single();
+
+      if (error) throw error;
+      return data;
+    }
+  });
 
   // Query for player updates (injured, inactive players)
   const { data: playerUpdates } = useQuery({
@@ -158,11 +177,15 @@ const DashboardPage = () => {
           </TabsList>
           
           <TabsContent value="overview">
-            <TeamOverview leagues={leagues} isLoading={isLeaguesLoading} />
+            {profile?.role === 'commissioner' ? (
+              <CommissionerDashboard />
+            ) : (
+              <TeamOverview leagues={leagues} isLoading={isLeaguesLoading} />
+            )}
           </TabsContent>
           
           <TabsContent value="players">
-            <MyPlayersSection players={myPlayers} />
+            <MyPlayersSection />
           </TabsContent>
           
           <TabsContent value="news">

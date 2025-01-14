@@ -10,7 +10,7 @@ export const useLeagues = () => {
   const [isAuthReady, setIsAuthReady] = useState(false);
 
   useEffect(() => {
-    console.log('Setting up auth state listener...');
+    // console.log('Setting up auth state listener...');
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       // console.log('Auth state changed in useLeagues:', event, session?.user);
       setUser(session?.user || null);
@@ -68,7 +68,6 @@ export const useLeagues = () => {
           console.error('Error fetching platform user:', platformUserError);
           throw platformUserError;
         }
-
         if (!platformUser) {
           console.log('No platform user found');
           return [];
@@ -92,7 +91,7 @@ export const useLeagues = () => {
           throw functionError;
         }
 
-        console.log('Edge Function response:', functionData);
+        // console.log('Edge Function response:', functionData);
 
         // Fetch leagues with additional data
         const { data: leaguesData, error: leaguesError } = await supabase

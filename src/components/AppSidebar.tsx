@@ -69,22 +69,44 @@ export function AppSidebar() {
   const currentPath = location.pathname;
   const { collapsed } = useSidebar();
   const [userRole, setUserRole] = useState<UserRole>("regular_user");
-  const menuItems = getMenuItems(userRole);
 
   useEffect(() => {
     const fetchUserRole = async () => {
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('role')
-        .single();
-      
-      if (profile?.role) {
-        setUserRole(profile.role);
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+  
+      if (userError) {
+        console.error("Error fetching user ID:", userError);
+        return;
+      }
+  
+      if (user?.id) {
+        const { data: profile, error } = await supabase
+          .from('profiles')
+          .select('role')
+          .eq('id', user.id)
+          .single();
+  
+        if (error) {
+          console.error('Error fetching user role:', error);
+          return;
+        }
+  
+        if (profile?.role) {
+          setUserRole(profile.role);
+        } else {
+          console.log("User role not found, defaulting to regular_user");
+        }
       }
     };
-
+  
     fetchUserRole();
   }, []);
+
+  // Dynamically create menu items whenever the `userRole` changes
+  const menuItems = getMenuItems(userRole);
 
   const handleLogout = async () => {
     try {

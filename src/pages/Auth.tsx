@@ -47,7 +47,7 @@ const AuthPage = () => {
     checkAuth();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log("Auth state changed:", event, session?.user?.id);
+      // console.log("Auth state changed:", event, session?.user?.id);
       if (event === "SIGNED_IN" && session) {
         const { data: profile, error } = await supabase
           .from("profiles")
@@ -109,7 +109,7 @@ const AuthPage = () => {
         if (profileError) throw profileError;
 
         console.log("Profile successfully created/updated");
-        toast.success("Account created successfully. Please complete setup.");
+        toast.success("Account created successfully.");
         setShowSetup(true); // Manually open initial setup after sign-up
         return { user: data.user! };
       } else {

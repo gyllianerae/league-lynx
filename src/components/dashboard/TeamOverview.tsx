@@ -79,9 +79,9 @@ export const TeamOverview = ({ leagues, isLoading }: TeamOverviewProps) => {
         <CardContent className="p-8">
           <div className="flex flex-col items-center justify-center text-center">
             <Star className="h-12 w-12 text-mint/40 mb-4" />
-            <h3 className="text-xl font-semibold text-mint mb-2">No Leagues Found</h3>
+            <h3 className="text-xl font-semibold text-mint mb-2">Fetching Your Teams</h3>
             <p className="text-white/60 max-w-md">
-              You haven't joined any leagues yet. Connect your Sleeper account to see your leagues here.
+              We're connecting to Sleeper to retrieve your leagues and teams. This may take a moment...
             </p>
           </div>
         </CardContent>

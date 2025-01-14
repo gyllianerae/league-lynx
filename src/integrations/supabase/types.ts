@@ -9,6 +9,112 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      favorite_players: {
+        Row: {
+          created_at: string
+          id: number
+          player_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          player_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          player_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "favorite_players_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "players"
+            referencedColumns: ["player_id"]
+          },
+        ]
+      }
+      league_openings: {
+        Row: {
+          comments: string | null
+          commissioner_id: string
+          created_at: string
+          id: number
+          key_players: string | null
+          league_fee: number | null
+          league_id: string | null
+          league_name: string
+          league_type: Database["public"]["Enums"]["league_opening_type"]
+          losses: number | null
+          platform: string
+          rank: number | null
+          record: string | null
+          starters: string | null
+          team_name: string
+          team_status: Database["public"]["Enums"]["team_status"] | null
+          ties: number | null
+          upcoming_matchup: string | null
+          updated_at: string
+          wins: number | null
+        }
+        Insert: {
+          comments?: string | null
+          commissioner_id: string
+          created_at?: string
+          id?: number
+          key_players?: string | null
+          league_fee?: number | null
+          league_id?: string | null
+          league_name: string
+          league_type: Database["public"]["Enums"]["league_opening_type"]
+          losses?: number | null
+          platform: string
+          rank?: number | null
+          record?: string | null
+          starters?: string | null
+          team_name: string
+          team_status?: Database["public"]["Enums"]["team_status"] | null
+          ties?: number | null
+          upcoming_matchup?: string | null
+          updated_at?: string
+          wins?: number | null
+        }
+        Update: {
+          comments?: string | null
+          commissioner_id?: string
+          created_at?: string
+          id?: number
+          key_players?: string | null
+          league_fee?: number | null
+          league_id?: string | null
+          league_name?: string
+          league_type?: Database["public"]["Enums"]["league_opening_type"]
+          losses?: number | null
+          platform?: string
+          rank?: number | null
+          record?: string | null
+          starters?: string | null
+          team_name?: string
+          team_status?: Database["public"]["Enums"]["team_status"] | null
+          ties?: number | null
+          upcoming_matchup?: string | null
+          updated_at?: string
+          wins?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "league_openings_commissioner_id_fkey"
+            columns: ["commissioner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       leagues: {
         Row: {
           avatar_id: string | null
@@ -73,6 +179,56 @@ export type Database = {
             columns: ["platform_user_id"]
             isOneToOne: false
             referencedRelation: "platform_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      managed_teams: {
+        Row: {
+          commissioner_id: string
+          created_at: string
+          id: number
+          league_fee: number | null
+          league_id: string
+          league_type: string | null
+          notes: string | null
+          platform: string
+          team_name: string
+          team_status: Database["public"]["Enums"]["team_status"] | null
+          updated_at: string
+        }
+        Insert: {
+          commissioner_id: string
+          created_at?: string
+          id?: number
+          league_fee?: number | null
+          league_id: string
+          league_type?: string | null
+          notes?: string | null
+          platform: string
+          team_name: string
+          team_status?: Database["public"]["Enums"]["team_status"] | null
+          updated_at?: string
+        }
+        Update: {
+          commissioner_id?: string
+          created_at?: string
+          id?: number
+          league_fee?: number | null
+          league_id?: string
+          league_type?: string | null
+          notes?: string | null
+          platform?: string
+          team_name?: string
+          team_status?: Database["public"]["Enums"]["team_status"] | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "managed_teams_commissioner_id_fkey"
+            columns: ["commissioner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]
@@ -402,6 +558,7 @@ export type Database = {
         Row: {
           first_name: string | null
           id: string
+          initial_setup_completed: boolean | null
           last_name: string | null
           onboarding_status: string | null
           role: Database["public"]["Enums"]["user_role"] | null
@@ -412,6 +569,7 @@ export type Database = {
         Insert: {
           first_name?: string | null
           id: string
+          initial_setup_completed?: boolean | null
           last_name?: string | null
           onboarding_status?: string | null
           role?: Database["public"]["Enums"]["user_role"] | null
@@ -422,6 +580,7 @@ export type Database = {
         Update: {
           first_name?: string | null
           id?: string
+          initial_setup_completed?: boolean | null
           last_name?: string | null
           onboarding_status?: string | null
           role?: Database["public"]["Enums"]["user_role"] | null
@@ -442,6 +601,7 @@ export type Database = {
       }
     }
     Enums: {
+      league_opening_type: "Dynasty" | "Keeper" | "C2C" | "Redraft"
       league_status: "pre_draft" | "drafting" | "in_season" | "complete"
       listing_status: "open" | "closed" | "draft"
       player_position:
@@ -455,6 +615,7 @@ export type Database = {
         | "SUPER_FLEX"
         | "BENCH"
       sport_type: "football" | "nfl"
+      team_status: "active" | "open" | "orphaned"
       user_role: "regular_user" | "commissioner"
     }
     CompositeTypes: {
