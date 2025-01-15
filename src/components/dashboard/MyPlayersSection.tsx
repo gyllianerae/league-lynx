@@ -157,7 +157,7 @@ export const MyPlayersSection = () => {
     <Card className="bg-forest-light/30 border-mint/10">
       <CardHeader className="flex flex-row justify-between items-center p-6">
         <div className="flex items-center gap-4">
-          <h2 className="text-2xl font-bold text-mint">My Players</h2>
+          <h2 className="text-2xl font-bold text-foreground">My Players</h2>
           <div className="flex gap-2">
             <Button
               variant="outline"

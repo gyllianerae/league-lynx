@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Plus } from "lucide-react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Select,
   SelectContent,
@@ -116,8 +117,9 @@ export const PostLeagueOpeningDialog = () => {
         <DialogHeader>
           <DialogTitle className="text-mint">Post New League Opening</DialogTitle>
         </DialogHeader>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <ScrollArea className="h-[80vh] pr-4">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-4">
               <h3 className="text-sm font-medium text-mint/80">Team Information</h3>
               <FormField
@@ -352,8 +354,9 @@ export const PostLeagueOpeningDialog = () => {
             <Button type="submit" className="w-full bg-mint hover:bg-mint/90 text-forest">
               Post League Opening
             </Button>
-          </form>
-        </Form>
+            </form>
+          </Form>
+        </ScrollArea>
       </DialogContent>
     </Dialog>
   );

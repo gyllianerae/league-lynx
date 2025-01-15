@@ -37,7 +37,7 @@ export const PriceChart = () => {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-semibold text-white mb-4">Price chart</h2>
+      <h2 className="text-xl font-semibold text-white mb-4 text-start">Price chart</h2>
       <div className="h-[200px]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={priceData}>

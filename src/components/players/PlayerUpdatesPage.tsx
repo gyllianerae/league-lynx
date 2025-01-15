@@ -82,13 +82,13 @@ export const PlayerUpdatesPage = () => {
     <div className="space-y-6">
       <div className="flex items-center gap-2">
         <div className="h-2 w-2 bg-red-500 rounded-full animate-pulse" />
-        <h2 className="text-2xl font-bold text-mint">Player Updates</h2>
+        <h2 className="text-2xl font-bold text-foreground">Player Updates</h2>
       </div>
 
       <Tabs defaultValue="status" className="w-full">
         <TabsList className="bg-forest-light/30">
           <TabsTrigger value="status">Status Updates</TabsTrigger>
-          <TabsTrigger value="news">Latest News</TabsTrigger>
+          <TabsTrigger value="news" disabled className="opacity-50 cursor-not-allowed">Latest News</TabsTrigger>
         </TabsList>
 
         <TabsContent value="status" className="space-y-4">

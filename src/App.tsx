@@ -25,19 +25,19 @@ function App() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-forest flex justify-center items-center">
-        <div className="text-mint text-xl">Loading...</div>
+      <div className="min-h-screen bg-background flex justify-center items-center">
+        <div className="text-foreground text-xl">Loading...</div>
       </div>
     );
   }
 
   const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-forest relative">
+      <div className="min-h-screen flex w-full bg-background relative">
         <AppSidebar />
         <div className="flex-1">
           <TopNav />
-          <main className="p-8 overflow-y-auto h-[calc(100vh-4rem)] w-full mt-16">
+          <main className="p-8 overflow-y-auto h-[calc(100vh-4rem)] w-full mt-16 bg-background">
             <div className="max-w-7xl mx-auto">
               {children}
             </div>
@@ -48,9 +48,9 @@ function App() {
   );
 
   const PublicLayout = ({ children }: { children: React.ReactNode }) => (
-    <div className="min-h-screen w-full bg-forest">
+    <div className="min-h-screen w-full bg-background">
       <TopNav />
-      <main className="p-8 mt-16">
+      <main className="p-8 mt-16 bg-background">
         <div className="max-w-7xl mx-auto">
           {children}
         </div>

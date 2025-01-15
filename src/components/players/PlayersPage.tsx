@@ -107,7 +107,7 @@ export const PlayersPage = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-mint">Players</h2>
+        <h2 className="text-2xl font-bold text-foreground">Players</h2>
         <Select
           value={selectedLeagueId}
           onValueChange={setSelectedLeagueId}

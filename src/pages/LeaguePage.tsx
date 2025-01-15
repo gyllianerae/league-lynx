@@ -93,7 +93,7 @@ export default function LeaguePage() {
           <Trophy className="h-8 w-8 text-blue-400" />
           <h1 className="text-3xl font-bold text-mint">{league.name}</h1>
         </div>
-        <div className="text-white/60">
+        <div className="text-white/60 text-start">
           Season {league.season} • {league.total_rosters} Teams
         </div>
       </div>
@@ -105,7 +105,7 @@ export default function LeaguePage() {
             <Users className="h-5 w-5 text-mint" />
             <h3 className="text-lg font-semibold text-mint">Teams</h3>
           </div>
-          <div className="text-3xl font-bold text-white">{league.total_rosters}</div>
+          <div className="text-3xl font-bold text-white text-start">{league.total_rosters}</div>
         </Card>
 
         <Card className="bg-forest-light/30 border-mint/10 backdrop-blur-sm p-6">
@@ -113,7 +113,7 @@ export default function LeaguePage() {
             <Trophy className="h-5 w-5 text-mint" />
             <h3 className="text-lg font-semibold text-mint">Playoff Teams</h3>
           </div>
-          <div className="text-3xl font-bold text-white">6</div>
+          <div className="text-3xl font-bold text-white text-start">6</div>
         </Card>
 
         <Card className="bg-forest-light/30 border-mint/10 backdrop-blur-sm p-6">
@@ -121,7 +121,7 @@ export default function LeaguePage() {
             <CalendarDays className="h-5 w-5 text-mint" />
             <h3 className="text-lg font-semibold text-mint">Current Week</h3>
           </div>
-          <div className="text-3xl font-bold text-white">{weekDisplay}</div>
+          <div className="text-3xl font-bold text-white text-start">{weekDisplay}</div>
         </Card>
       </div>
 

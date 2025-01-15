@@ -28,7 +28,7 @@ export function TopNav() {
             variant="ghost"
             size="icon"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            className="text-white hover:text-mint hover:bg-forest-light/50"
+            className="text-foreground hover:text-sky-600 dark:text-white dark:hover:text-mint hover:bg-sky-100/50 dark:hover:bg-forest-light/50"
           >
             {theme === "light" ? (
               <Moon className="h-5 w-5" />
@@ -44,7 +44,7 @@ export function TopNav() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="text-white hover:text-mint hover:bg-forest-light/50"
+                    className="text-foreground hover:text-sky-600 dark:text-white dark:hover:text-mint hover:bg-sky-100/50 dark:hover:bg-forest-light/50"
                   >
                     {user?.user_metadata?.avatar_url ? (
                       <img 
@@ -57,9 +57,9 @@ export function TopNav() {
                     )}
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56 bg-forest-light/90 backdrop-blur-xl border-mint/10">
+                <DropdownMenuContent className="bg-white/90 dark:bg-forest-light/90 backdrop-blur-xl border-sky-600/10 dark:border-mint/10">
                   <DropdownMenuItem
-                    className="text-mint hover:bg-forest-light/50 cursor-pointer"
+                    className="text-sky-600 hover:bg-sky-100/50 dark:text-mint dark:hover:bg-forest-light/50 cursor-pointer"
                     onClick={() => setShowSettings(true)}
                   >
                     <Settings className="mr-2 h-4 w-4" />
@@ -71,7 +71,7 @@ export function TopNav() {
           ) : (
             <Button
               variant="ghost"
-              className="text-white hover:text-mint hover:bg-forest-light/50"
+              className="text-foreground hover:text-sky-600 dark:text-white dark:hover:text-mint hover:bg-sky-100/50 dark:hover:bg-forest-light/50"
               onClick={() => navigate('/auth')}
             >
               <LogIn className="mr-2 h-4 w-4" />

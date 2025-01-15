@@ -29,7 +29,9 @@ export default {
         },
         divine: {
           DEFAULT: "#FFD700",
-        }
+        },
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
       },
       fontFamily: {
         sans: ["Inter var", "system-ui", "sans-serif"],

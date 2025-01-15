@@ -94,7 +94,7 @@ export const PlayerStats = ({
     <div className="space-y-8 h-full">
       {!showDetailedStatsOnly && (
         <div className="h-full flex flex-col justify-between">
-          <h2 className="text-xl font-semibold text-white mb-6">Quick Stats</h2>
+          <h2 className="text-xl font-semibold text-mint mb-6 text-start">Quick Stats</h2>
           <div className="flex flex-col gap-4">
             {stats.map((stat, index) => (
               <div 
@@ -109,7 +109,7 @@ export const PlayerStats = ({
                     <div className="text-sm text-white/60 group-hover:text-white/80 transition-colors">
                       {stat.label}
                     </div>
-                    <div className="text-base font-semibold text-white">
+                    <div className="text-base font-semibold text-white text-start">
                       {stat.value}
                     </div>
                   </div>

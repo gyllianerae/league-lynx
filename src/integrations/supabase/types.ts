@@ -347,6 +347,7 @@ export type Database = {
       }
       platform_users: {
         Row: {
+          auth_data: Json | null
           avatar_id: string | null
           created_at: string
           display_name: string | null
@@ -359,6 +360,7 @@ export type Database = {
           username: string
         }
         Insert: {
+          auth_data?: Json | null
           avatar_id?: string | null
           created_at?: string
           display_name?: string | null
@@ -371,6 +373,7 @@ export type Database = {
           username: string
         }
         Update: {
+          auth_data?: Json | null
           avatar_id?: string | null
           created_at?: string
           display_name?: string | null

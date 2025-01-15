@@ -105,7 +105,6 @@ export function AppSidebar() {
     fetchUserRole();
   }, []);
 
-  // Dynamically create menu items whenever the `userRole` changes
   const menuItems = getMenuItems(userRole);
 
   const handleLogout = async () => {
@@ -134,10 +133,10 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar className="bg-forest border-r border-mint/10">
+    <Sidebar className="bg-gray-50 dark:bg-forest border-r border-gray-200 dark:border-mint/10">
       <SidebarContent>
         <div className={`px-6 py-5 mb-6 relative ${collapsed ? "px-2" : ""}`}>
-          <h1 className={`text-xl font-bold text-mint ${collapsed ? "hidden" : ""}`}>League Lynx</h1>
+          <h1 className={`text-xl font-bold text-sky-900 dark:text-mint ${collapsed ? "hidden" : ""}`}>League Lynx</h1>
           <SidebarTrigger />
         </div>
         
@@ -151,8 +150,8 @@ export function AppSidebar() {
                       onClick={() => navigate(getPath(item))}
                       className={`flex justify-start gap-3 w-full ${
                         isActive(item.path)
-                          ? 'bg-mint/10 text-mint'
-                          : 'text-white/70 hover:text-mint hover:bg-forest-light/50'
+                          ? 'bg-sky-100 text-sky-900 dark:bg-mint/10 dark:text-mint'
+                          : 'text-gray-600 hover:text-sky-900 hover:bg-sky-50 dark:text-white/70 dark:hover:text-mint dark:hover:bg-forest-light/50'
                       } ${collapsed ? "justify-center px-2" : ""}`}
                     >
                       <item.icon className="h-5 w-5" />
@@ -168,8 +167,8 @@ export function AppSidebar() {
                           onClick={() => navigate(subItem.path)}
                           className={`w-full justify-start text-sm ${
                             currentPath === subItem.path
-                              ? 'text-mint'
-                              : 'text-white/50 hover:text-mint'
+                              ? 'text-sky-900 dark:text-mint'
+                              : 'text-gray-500 hover:text-sky-900 dark:text-white/50 dark:hover:text-mint'
                           }`}
                           variant="ghost"
                         >

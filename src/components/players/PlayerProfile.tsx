@@ -245,7 +245,7 @@ export function PlayerProfile() {
                     key={index}
                     className="p-4 rounded-lg bg-forest-light/30 border border-mint/10 hover:border-mint/20 transition-all group"
                   >
-                    <div className="font-medium text-white mb-2">{league.league_name}</div>
+                    <div className="font-medium text-white mb-2 text-start">{league.league_name}</div>
                     <div className="flex items-center gap-2 text-sm">
                       {league.is_available ? (
                         <>

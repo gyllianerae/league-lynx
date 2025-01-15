@@ -119,7 +119,7 @@ const DashboardPage = () => {
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-[#F1F1F1]">Dashboard</h1>
+        <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
         <div className="flex gap-2">
           <YearSelector 
             selectedYear={selectedYear} 

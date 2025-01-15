@@ -147,7 +147,7 @@ export const PlayerUpdatesSection = ({ players }: PlayerUpdatesSectionProps) => 
       <CardHeader className="flex flex-row justify-between items-center p-6">
         <div className="flex items-center gap-2">
           <div className="h-2 w-2 bg-red-500 rounded-full animate-pulse" />
-          <h2 className="text-2xl font-bold text-mint">My Player Updates</h2>
+          <h2 className="text-2xl font-bold text-foreground">My Player Updates</h2>
         </div>
         <Link 
           to="/players/updates" 
@@ -162,7 +162,7 @@ export const PlayerUpdatesSection = ({ players }: PlayerUpdatesSectionProps) => 
         <Tabs defaultValue="status" className="w-full">
           <TabsList className="bg-forest-light/30">
             <TabsTrigger value="status">Status Updates</TabsTrigger>
-            <TabsTrigger value="news">Latest News</TabsTrigger>
+            <TabsTrigger value="news" disabled>Latest News</TabsTrigger>
           </TabsList>
 
           <TabsContent value="status">

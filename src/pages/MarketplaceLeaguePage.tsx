@@ -128,7 +128,7 @@ export default function MarketplaceLeaguePage() {
             <div className="flex items-start justify-between">
               <div className="backdrop-blur-xl bg-forest/30 p-6 rounded-xl border border-mint/10">
                 <h1 className="text-4xl font-bold text-white mb-2">{league.title}</h1>
-                <p className="text-mint/80">Commissioner: {league.commissioner_name}</p>
+                <p className="text-mint/80 text-start">Commissioner: {league.commissioner_name}</p>
               </div>
               <div className="backdrop-blur-xl bg-mint/10 px-4 py-2 rounded-full border border-mint/10">
                 <span className="text-mint">{league.season} Season</span>
@@ -145,7 +145,7 @@ export default function MarketplaceLeaguePage() {
             <Trophy className="h-5 w-5 text-mint" />
             <h3 className="text-lg font-semibold text-mint">Prize Pool</h3>
           </div>
-          <div className="text-3xl font-bold text-white">
+          <div className="text-3xl font-bold text-white text-start">
             ${league.prize_pool || 0}
           </div>
         </Card>
@@ -155,7 +155,7 @@ export default function MarketplaceLeaguePage() {
             <Users className="h-5 w-5 text-mint" />
             <h3 className="text-lg font-semibold text-mint">Available Spots</h3>
           </div>
-          <div className="text-3xl font-bold text-white">
+          <div className="text-3xl font-bold text-white text-start">
             {league.total_spots - league.filled_spots} of {league.total_spots}
           </div>
         </Card>
@@ -165,7 +165,7 @@ export default function MarketplaceLeaguePage() {
             <CalendarDays className="h-5 w-5 text-mint" />
             <h3 className="text-lg font-semibold text-mint">Draft Date</h3>
           </div>
-          <div className="text-3xl font-bold text-white">
+          <div className="text-3xl font-bold text-white text-start">
             {league.draft_date ? new Date(league.draft_date).toLocaleDateString() : 'TBD'}
           </div>
         </Card>
@@ -173,8 +173,8 @@ export default function MarketplaceLeaguePage() {
 
       {/* League Description */}
       <Card className="bg-forest-light/30 border-mint/10 backdrop-blur-sm p-6">
-        <h2 className="text-2xl font-bold text-mint mb-4">About this League</h2>
-        <p className="text-white/80 leading-relaxed">{league.description || 'No description available.'}</p>
+        <h2 className="text-2xl font-bold text-mint mb-4 text-start">About this League</h2>
+        <p className="text-white/80 leading-relaxed text-start">{league.description || 'No description available.'}</p>
       </Card>
 
       {/* Join League Button - Only show for regular users */}

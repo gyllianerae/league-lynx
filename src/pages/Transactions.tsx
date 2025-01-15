@@ -65,7 +65,7 @@ const Transactions = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3">
-        <h1 className="text-2xl font-bold text-mint">Recent Transactions</h1>
+        <h1 className="text-2xl font-bold text-foreground">Recent Transactions</h1>
       </div>
 
       <div className="space-y-4">

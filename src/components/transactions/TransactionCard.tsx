@@ -79,8 +79,8 @@ export const TransactionCard = ({ transaction, leagueName }: TransactionCardProp
         )}
 
         {transaction.adds && Object.keys(transaction.adds).length > 0 && (
-          <div>
-            <div className="text-green-400 mb-2">Added Players</div>
+          <div className="">
+            <div className="text-green-400 mb-2 text-start">Added Players</div>
             {Object.entries(transaction.adds).map(([playerId, rosterId]) => (
               <div
                 key={playerId}
@@ -108,7 +108,7 @@ export const TransactionCard = ({ transaction, leagueName }: TransactionCardProp
 
         {transaction.drops && Object.keys(transaction.drops).length > 0 && (
           <div>
-            <div className="text-red-400 mb-2">Dropped Players</div>
+            <div className="text-red-400 mb-2 text-start">Dropped Players</div>
             {Object.entries(transaction.drops).map(([playerId, rosterId]) => (
               <div
                 key={playerId}

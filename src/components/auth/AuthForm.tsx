@@ -6,6 +6,7 @@ import { UserInfoFields } from "./UserInfoFields";
 import { SleeperIntegration } from "./SleeperIntegration";
 import { AuthFormSubmit } from "./AuthFormSubmit";
 import { SleeperVerificationDialog } from "./SleeperVerificationDialog";
+import { FantraxLoginDialog } from "./FantraxLoginDialog";
 import { EmailField } from "./EmailField";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
@@ -23,6 +24,7 @@ interface AuthFormProps {
 
 export const AuthForm = ({ isSignUp, onSubmit }: AuthFormProps) => {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [showFantraxLogin, setShowFantraxLogin] = useState(false);
   const {
     firstName,
     setFirstName,
@@ -51,6 +53,18 @@ export const AuthForm = ({ isSignUp, onSubmit }: AuthFormProps) => {
     handleSubmit(e);
   };
 
+  const handlePlatformChange = (platform: string) => {
+    setSelectedPlatform(platform);
+    if (platform === "Fantrax") {
+      setShowFantraxLogin(true);
+    }
+  };
+
+  const handleFantraxLoginSuccess = (username: string) => {
+    console.log("Fantrax login successful:", username);
+    // Handle the successful login here
+  };
+
   return (
     <>
       <form onSubmit={onSubmitWrapper} className="space-y-6">
@@ -65,7 +79,7 @@ export const AuthForm = ({ isSignUp, onSubmit }: AuthFormProps) => {
 
             <PlatformSelect
               value={selectedPlatform}
-              onChange={setSelectedPlatform}
+              onChange={handlePlatformChange}
             />
 
             {selectedPlatform === "Sleeper" && (
@@ -116,6 +130,12 @@ export const AuthForm = ({ isSignUp, onSubmit }: AuthFormProps) => {
           onCancel={handleVerificationCancel}
         />
       )}
+
+      <FantraxLoginDialog
+        open={showFantraxLogin}
+        onOpenChange={setShowFantraxLogin}
+        onLoginSuccess={handleFantraxLoginSuccess}
+      />
     </>
   );
 };
