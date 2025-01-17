@@ -67,7 +67,7 @@ export const PlayerUpdatesPage = () => {
   });
 
   if (isPlayersLoading || isNewsLoading) {
-    return <div className="text-mint/60">Loading player updates...</div>;
+    return <div className="text-gray-500 dark:text-mint/60">Loading player updates...</div>;
   }
 
   if (playerError || newsError) {
@@ -82,12 +82,12 @@ export const PlayerUpdatesPage = () => {
     <div className="space-y-6">
       <div className="flex items-center gap-2">
         <div className="h-2 w-2 bg-red-500 rounded-full animate-pulse" />
-        <h2 className="text-2xl font-bold text-foreground">Player Updates</h2>
+        <h2 className="text-2xl font-bold text-sky-900 dark:text-mint">Player Updates</h2>
       </div>
 
       <Tabs defaultValue="status" className="w-full">
-        <TabsList className="bg-forest-light/30">
-          <TabsTrigger value="status">Status Updates</TabsTrigger>
+        <TabsList className="text-sky-900 bg-gray-50 dark:bg-forest-light/30">
+          <TabsTrigger value="status" className="data-[state=active]:text-sky-900">Status Updates</TabsTrigger>
           <TabsTrigger value="news" disabled className="opacity-50 cursor-not-allowed">Latest News</TabsTrigger>
         </TabsList>
 
@@ -98,27 +98,27 @@ export const PlayerUpdatesPage = () => {
             players.map((player) => (
               <Card
                 key={player.player_id}
-                className="bg-forest-light/50 border-mint/10 backdrop-blur-xl"
+                className="bg-gray-50 dark:bg-forest-light/50 dark:border-mint/10 backdrop-blur-xl"
               >
                 <div className="p-4">
                   <div className="flex items-center gap-4">
-                    <Avatar className="h-12 w-12 rounded-lg">
+                    <Avatar className="h-12 w-12 rounded-3xl bg-gray-200">
                       <AvatarImage src={player.image_url || "/default-avatar.png"} alt="Player Avatar" />
                     </Avatar>
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-semibold text-white">{player.full_name}</span>
-                        <span className="text-sm font-medium text-gray-400">{player.position || "N/A"}</span>
+                        <span className="text-lg font-semibold text-sky-900 dark:text-white">{player.full_name}</span>
+                        <span className="text-sm font-medium text-sky-900 dark:text-gray-400">{player.position || "N/A"}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-400">
+                      <div className="flex items-center gap-2 text-sm text-sky-900 dark:text-gray-400">
                         <span>{player.team || "Free Agent"}</span>
-                        {player.number && <span className="text-gray-600">• #{player.number}</span>}
+                        {player.number && <span className="text-sky-900 dark:text-gray-600">• #{player.number}</span>}
                       </div>
                     </div>
                   </div>
                   <div className="mt-3 flex gap-2">
                     {player.injury_status && (
-                      <Badge variant="outline" className="bg-red-900/50 text-red-400">
+                      <Badge variant="outline" className="bg-red-500/10 text-red-400">
                         Injury: {player.injury_status}
                       </Badge>
                     )}

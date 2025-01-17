@@ -94,22 +94,22 @@ export const PlayerStats = ({
     <div className="space-y-8 h-full">
       {!showDetailedStatsOnly && (
         <div className="h-full flex flex-col justify-between">
-          <h2 className="text-xl font-semibold text-mint mb-6 text-start">Quick Stats</h2>
+          <h2 className="text-xl font-semibold text-sky-900 dark:text-mint mb-6 text-start">Quick Stats</h2>
           <div className="flex flex-col gap-4">
             {stats.map((stat, index) => (
               <div 
                 key={index}
-                className="group p-3 rounded-xl bg-forest-light/30 backdrop-blur-sm border border-mint/10 hover:border-mint/20 transition-all"
+                className="group p-3 rounded-xl bg-gray-200 dark:bg-forest-light/30 backdrop-blur-sm border dark:border-mint/10 hover:border-mint/20 transition-all"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-forest-light/50 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <stat.icon className="h-5 w-5 text-mint" />
+                  <div className="w-10 h-10 rounded-full bg-gray-300 dark:bg-forest-light/50 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <stat.icon className="h-5 w-5 text-sky-900 dark:text-mint" />
                   </div>
                   <div>
-                    <div className="text-sm text-white/60 group-hover:text-white/80 transition-colors">
+                    <div className="text-sm text-sky-900 dark:text-white/60 transition-colors text-start">
                       {stat.label}
                     </div>
-                    <div className="text-base font-semibold text-white text-start">
+                    <div className="text-base font-semibold text-gray-900 dark:text-white text-start">
                       {stat.value}
                     </div>
                   </div>
@@ -122,14 +122,14 @@ export const PlayerStats = ({
 
       {!showQuickStatsOnly && (
         <div className="space-y-4">
-          <h2 className="text-xl font-semibold text-white mb-4">Detailed Statistics</h2>
-          <div className="rounded-lg border border-mint/10 overflow-hidden">
+          <h2 className="text-xl font-semibold text-start text-sky-900 dark:text-white mb-4">Detailed Statistics</h2>
+          <div className="rounded-lg border dark:border-mint/10 overflow-hidden">
             <Table>
               <TableHeader>
-                <TableRow className="hover:bg-forest-light/40 border-b border-mint/10">
-                  <TableHead className="text-mint">Category</TableHead>
-                  <TableHead className="text-mint">Stat</TableHead>
-                  <TableHead className="text-mint">Value</TableHead>
+                <TableRow className="dark:hover:bg-forest-light/40 border-b dark:border-mint/10">
+                  <TableHead className="text-sky-900 dark:text-mint">Category</TableHead>
+                  <TableHead className="text-sky-900 dark:text-mint">Stat</TableHead>
+                  <TableHead className="text-sky-900 dark:text-mint">Value</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -137,18 +137,18 @@ export const PlayerStats = ({
                   category.stats.map((stat, statIndex) => (
                     <TableRow 
                       key={`${categoryIndex}-${statIndex}`}
-                      className="hover:bg-forest-light/40 border-b border-mint/10 last:border-0"
+                      className="dark:hover:bg-forest-light/40 border-b dark:border-mint/10 last:border-0"
                     >
                       {statIndex === 0 && (
                         <TableCell 
-                          className="font-medium text-white/80"
+                          className="font-medium text-sky-900 dark:text-white/80"
                           rowSpan={category.stats.length}
                         >
                           {category.category}
                         </TableCell>
                       )}
-                      <TableCell className="text-white/60">{stat.label}</TableCell>
-                      <TableCell className="text-white">{stat.value}</TableCell>
+                      <TableCell className="text-sky-900 dark:text-white/60">{stat.label}</TableCell>
+                      <TableCell className="text-sky-900 dark:text-white">{stat.value}</TableCell>
                     </TableRow>
                   ))
                 ))}

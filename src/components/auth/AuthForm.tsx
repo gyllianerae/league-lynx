@@ -105,11 +105,11 @@ export const AuthForm = ({ isSignUp, onSubmit }: AuthFormProps) => {
               id="terms"
               checked={acceptedTerms}
               onCheckedChange={(checked) => setAcceptedTerms(checked as boolean)}
-              className="border-mint/20 data-[state=checked]:bg-mint data-[state=checked]:text-forest"
+              className="dark:border-mint/20 dark:data-[state=checked]:bg-mint data-[state=checked]:text-forest"
             />
             <label
               htmlFor="terms"
-              className="text-sm text-mint/80 cursor-pointer"
+              className="text-sm text-gray-500 dark:text-mint/80 cursor-pointer"
             >
               I agree to the Terms and Conditions
             </label>

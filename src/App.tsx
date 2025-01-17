@@ -26,18 +26,18 @@ function App() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background flex justify-center items-center">
-        <div className="text-foreground text-xl">Loading...</div>
+        <div className="text-sky-900 dark:text-mint text-xl">Loading...</div>
       </div>
     );
   }
 
   const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-background relative">
+      <div className="min-h-screen flex w-full bg-background relative selection:bg-gray-200 dark:selection:bg-mint/50">
         <AppSidebar />
         <div className="flex-1">
           <TopNav />
-          <main className="p-8 overflow-y-auto h-[calc(100vh-4rem)] w-full mt-16 bg-background">
+          <main className="p-8 overflow-y-auto h-[calc(100vh-4rem)] w-full mt-16 bg-gray-100 dark:bg-forest">
             <div className="max-w-7xl mx-auto">
               {children}
             </div>

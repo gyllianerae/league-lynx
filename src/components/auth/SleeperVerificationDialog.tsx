@@ -35,12 +35,12 @@ export const SleeperVerificationDialog = memo(({
 
   return (
     <Dialog open={true}>
-      <DialogContent className="bg-forest/95 backdrop-blur-xl border border-mint/10 shadow-2xl shadow-mint/10 max-w-sm mx-auto rounded-xl p-6 sm:p-8 m-4">
+      <DialogContent className="bg-gray-100 dark:bg-forest/95 backdrop-blur-xl border dark:border-mint/10 shadow-2xl dark:shadow-mint/10 max-w-sm mx-auto rounded-xl p-6 sm:p-8 m-4">
         <DialogHeader className="space-y-3 text-center">
-          <DialogTitle className="text-2xl font-bold text-mint">
+          <DialogTitle className="text-2xl font-bold text-sky-900 dark:text-mint">
             Account Setup
           </DialogTitle>
-          <DialogDescription className="text-mint/80 text-base">
+          <DialogDescription className="text-sm text-start text-gray-500 dark:text-mint/80">
             Verify your Sleeper account and complete your setup
           </DialogDescription>
         </DialogHeader>
@@ -58,28 +58,28 @@ export const SleeperVerificationDialog = memo(({
               
               <div className="w-full space-y-6 mt-4">
                 <div className="space-y-4">
-                  <Label className="text-mint">Select Your Role</Label>
+                  <Label className="text-sky-900 dark:text-mint">Select Your Role</Label>
                   <RadioGroup value={role} onValueChange={(value: "regular_user" | "commissioner") => setRole(value)}>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="regular_user" id="regular_user" />
-                      <Label htmlFor="regular_user" className="text-mint/80">Regular User</Label>
+                      <Label htmlFor="regular_user" className="text-sky-900 dark:text-mint/80">Regular User</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="commissioner" id="commissioner" />
-                      <Label htmlFor="commissioner" className="text-mint/80">Commissioner</Label>
+                      <Label htmlFor="commissioner" className="text-sky-900 dark:text-mint/80">Commissioner</Label>
                     </div>
                   </RadioGroup>
                 </div>
 
                 <div className="space-y-4">
-                  <Label className="text-mint">Select Season to Display</Label>
+                  <Label className="text-sky-900 dark:text-mint">Select Season to Display</Label>
                   <Select value={season} onValueChange={setSeason}>
-                    <SelectTrigger className="w-full bg-forest border-mint/20 text-mint">
+                    <SelectTrigger className="w-full bg-gray-100 dark:bg-forest dark:border-mint/20 dark:text-mint">
                       <SelectValue placeholder="Select season" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-gray-100 dark:bg-forest text-sky-900 dark:text-mint">
                       {seasons.map((year) => (
-                        <SelectItem key={year} value={year}>
+                        <SelectItem key={year} value={year} className="hover:bg-gray-200 cursor-pointer dark:hover:bg-mint">
                           {year} Season
                         </SelectItem>
                       ))}
@@ -95,14 +95,14 @@ export const SleeperVerificationDialog = memo(({
           <Button
             variant="outline"
             onClick={onCancel}
-            className="border-mint/20 text-mint hover:bg-mint/10 hover:text-mint/90 transition-colors"
+            className="bg-gray-100 dark:border-mint/20 dark:text-mint dark:hover:bg-mint/10 dark:hover:text-mint/90 transition-colors"
           >
             Cancel
           </Button>
           <Button
             onClick={handleConfirm}
             disabled={!sleeperUser}
-            className="bg-mint text-forest hover:bg-mint/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-sky-900  text-gray-50 dark:bg-mint dark:text-forest dark:hover:bg-mint/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Complete Setup
           </Button>

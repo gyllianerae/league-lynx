@@ -154,10 +154,10 @@ export const MyPlayersSection = () => {
       : isLeaguePlayersLoading;
 
   return (
-    <Card className="bg-forest-light/30 border-mint/10">
+    <Card className="bg-gray-100 dark:bg-forest-light/30 dark:border-mint/10">
       <CardHeader className="flex flex-row justify-between items-center p-6">
         <div className="flex items-center gap-4">
-          <h2 className="text-2xl font-bold text-foreground">My Players</h2>
+          <h2 className="text-2xl font-bold text-sky-900 dark:text-mint">My Players</h2>
           <div className="flex gap-2">
             <Button
               variant="outline"
@@ -166,8 +166,8 @@ export const MyPlayersSection = () => {
                 setShowTrending(false);
                 setShowFavorites(!showFavorites);
               }}
-              className={`bg-forest-light/30 border-mint/20 hover:bg-forest-light/40 ${
-                showFavorites ? 'text-yellow-400' : 'text-mint'
+              className={`bg-gray-200 border-gray-300 hover:bg-gray-300 dark:bg-forest-light/30 dark:border-mint/20 dark:hover:bg-forest-light/40 ${
+                showFavorites ? 'text-yellow-600 dark:text-yellow-400' : 'text-sky-900 dark:text-mint'
               }`}
             >
               <Star className="h-4 w-4 mr-2" />
@@ -180,8 +180,8 @@ export const MyPlayersSection = () => {
                 setShowFavorites(false);
                 setShowTrending(!showTrending);
               }}
-              className={`bg-forest-light/30 border-mint/20 hover:bg-forest-light/40 ${
-                showTrending ? 'text-yellow-400' : 'text-mint'
+              className={`bg-gray-200 border-gray-300 hover:bg-gray-300 dark:bg-forest-light/30 dark:border-mint/20 dark:hover:bg-forest-light/40 ${
+                showTrending ? 'text-yellow-600 dark:text-yellow-400' : 'text-sky-900 dark:text-mint'
               }`}
             >
               <TrendingUp className="h-4 w-4 mr-2" />
@@ -191,7 +191,7 @@ export const MyPlayersSection = () => {
         </div>
         <Link 
           to="/players/my-players" 
-          className="text-mint hover:text-mint/80 flex items-center gap-1"
+          className="text-sky-900 dark:text-mint dark:hover:text-mint/80 flex items-center gap-1"
         >
           View All
           <ArrowRight className="h-4 w-4" />

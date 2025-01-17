@@ -109,27 +109,27 @@ export const PostLeagueOpeningDialog = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-mint hover:bg-mint/90 text-forest">
+        <Button className="bg-sky-900 text-gray-50 dark:bg-mint  dark:hover:bg-mint/90 dark:text-forest">
           <Plus className="mr-2 h-4 w-4" /> Post Opening
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-forest-light border-mint/10">
+      <DialogContent className="dark:bg-forest-light dark:border-mint/10">
         <DialogHeader>
-          <DialogTitle className="text-mint">Post New League Opening</DialogTitle>
+          <DialogTitle className="text-sky-900 dark:text-mint">Post New League Opening</DialogTitle>
         </DialogHeader>
         <ScrollArea className="h-[80vh] pr-4">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 p-1">
             <div className="space-y-4">
-              <h3 className="text-sm font-medium text-mint/80">Team Information</h3>
+              <h3 className="text-sm font-semibold text-sky-900 dark:text-mint/80">Team Information</h3>
               <FormField
                 control={form.control}
                 name="teamName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-mint">Team Name</FormLabel>
+                    <FormLabel className="text-sky-900 dark:text-mint">Team Name</FormLabel>
                     <FormControl>
-                      <Input {...field} className="bg-forest border-mint/20 text-white" />
+                      <Input {...field} className="bg-gray-50 text-sky-900 selection:bg-gray-200 dark:bg-forest dark:border-mint/20 dark:text-white" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -140,17 +140,17 @@ export const PostLeagueOpeningDialog = () => {
                 name="teamStatus"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-mint">Team Status</FormLabel>
+                    <FormLabel className="text-sky-900 dark:text-mint">Team Status</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger className="bg-forest border-mint/20 text-white">
+                        <SelectTrigger className="bg-gray-50 text-sky-900 selection:bg-gray-200 dark:bg-forest dark:border-mint/20 dark:text-white">
                           <SelectValue placeholder="Select status" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="bg-forest-light border-mint/10">
-                        <SelectItem value="open">Open</SelectItem>
-                        <SelectItem value="orphaned">Orphaned</SelectItem>
-                        <SelectItem value="active">Active</SelectItem>
+                      <SelectContent className="bg-gray-50 text-sky-900 dark:text-white dark:bg-forest-light dark:border-mint/10">
+                        <SelectItem value="open" className="hover:bg-gray-100 dark:hover:bg-mint/10 cursor-pointer">Open</SelectItem>
+                        <SelectItem value="orphaned" className="hover:bg-gray-100 dark:hover:bg-mint/10 cursor-pointer">Orphaned</SelectItem>
+                        <SelectItem value="active" className="hover:bg-gray-100 dark:hover:bg-mint/10 cursor-pointer">Active</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -163,9 +163,9 @@ export const PostLeagueOpeningDialog = () => {
                   name="wins"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-mint">Wins</FormLabel>
+                      <FormLabel className="text-sky-900 dark:text-mint">Wins</FormLabel>
                       <FormControl>
-                        <Input {...field} type="number" className="bg-forest border-mint/20 text-white" />
+                        <Input {...field} type="number" className="bg-gray-50 text-sky-900 selection:bg-gray-200 dark:bg-forest dark:border-mint/20 dark:text-white" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -176,9 +176,9 @@ export const PostLeagueOpeningDialog = () => {
                   name="losses"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-mint">Losses</FormLabel>
+                      <FormLabel className="text-sky-900 dark:text-mint">Losses</FormLabel>
                       <FormControl>
-                        <Input {...field} type="number" className="bg-forest border-mint/20 text-white" />
+                        <Input {...field} type="number" className="bg-gray-50 text-sky-900 selection:bg-gray-200 dark:bg-forest dark:border-mint/20 dark:text-white" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -189,9 +189,9 @@ export const PostLeagueOpeningDialog = () => {
                   name="ties"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-mint">Ties</FormLabel>
+                      <FormLabel className="text-sky-900 dark:text-mint">Ties</FormLabel>
                       <FormControl>
-                        <Input {...field} type="number" className="bg-forest border-mint/20 text-white" />
+                        <Input {...field} type="number" className="bg-gray-50 text-sky-900 selection:bg-gray-200 dark:bg-forest dark:border-mint/20 dark:text-white" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -203,9 +203,9 @@ export const PostLeagueOpeningDialog = () => {
                 name="rank"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-mint">Current Rank</FormLabel>
+                    <FormLabel className="text-sky-900 dark:text-mint">Current Rank</FormLabel>
                     <FormControl>
-                      <Input {...field} type="number" className="bg-forest border-mint/20 text-white" />
+                      <Input {...field} type="number" className="bg-gray-50 text-sky-900 selection:bg-gray-200 dark:bg-forest dark:border-mint/20 dark:text-white" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -214,15 +214,15 @@ export const PostLeagueOpeningDialog = () => {
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-sm font-medium text-mint/80">League Details</h3>
+              <h3 className="text-sm font-semibold text-sky-900 dark:text-mint/80">League Details</h3>
               <FormField
                 control={form.control}
                 name="leagueName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-mint">League Name</FormLabel>
+                    <FormLabel className="text-sky-900 dark:text-mint">League Name</FormLabel>
                     <FormControl>
-                      <Input {...field} className="bg-forest border-mint/20 text-white" />
+                      <Input {...field} className="bg-gray-50 text-sky-900 selection:bg-gray-200 dark:bg-forest dark:border-mint/20 dark:text-white" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -233,9 +233,9 @@ export const PostLeagueOpeningDialog = () => {
                 name="leagueId"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-mint">League ID</FormLabel>
+                    <FormLabel className="text-sky-900 dark:text-mint">League ID</FormLabel>
                     <FormControl>
-                      <Input {...field} className="bg-forest border-mint/20 text-white" />
+                      <Input {...field} className="bg-gray-50 text-sky-900 selection:bg-gray-200 dark:bg-forest dark:border-mint/20 dark:text-white" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -247,9 +247,9 @@ export const PostLeagueOpeningDialog = () => {
                   name="leagueFee"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-mint">League Fee ($)</FormLabel>
+                      <FormLabel className="text-sky-900 dark:text-mint">League Fee ($)</FormLabel>
                       <FormControl>
-                        <Input {...field} type="number" className="bg-forest border-mint/20 text-white" />
+                        <Input {...field} type="number" className="bg-gray-50 text-sky-900 selection:bg-gray-200 dark:bg-forest dark:border-mint/20 dark:text-white" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -260,18 +260,18 @@ export const PostLeagueOpeningDialog = () => {
                   name="leagueType"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-mint">League Type</FormLabel>
+                      <FormLabel className="text-sky-900 dark:text-mint">League Type</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger className="bg-forest border-mint/20 text-white">
+                          <SelectTrigger className="bg-gray-50 text-sky-900 selection:bg-gray-200 dark:bg-forest dark:border-mint/20 dark:text-white">
                             <SelectValue placeholder="Select type" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="bg-forest-light border-mint/10">
-                          <SelectItem value="Dynasty">Dynasty</SelectItem>
-                          <SelectItem value="Keeper">Keeper</SelectItem>
-                          <SelectItem value="C2C">C2C</SelectItem>
-                          <SelectItem value="Redraft">Redraft</SelectItem>
+                        <SelectContent className="bg-gray-100 text-sky-900 dark:text-mint dark:bg-forest-light dark:border-mint/10">
+                          <SelectItem value="Dynasty" className="hover:bg-gray-200 dark:hover:bg-mint/10 cursor-pointer">Dynasty</SelectItem>
+                          <SelectItem value="Keeper" className="hover:bg-gray-200 dark:hover:bg-mint/10 cursor-pointer">Keeper</SelectItem>
+                          <SelectItem value="C2C" className="hover:bg-gray-200 dark:hover:bg-mint/10 cursor-pointer">C2C</SelectItem>
+                          <SelectItem value="Redraft" className="hover:bg-gray-200 dark:hover:bg-mint/10 cursor-pointer">Redraft</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -284,9 +284,9 @@ export const PostLeagueOpeningDialog = () => {
                 name="platform"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-mint">Platform</FormLabel>
+                    <FormLabel className="text-sky-900 dark:text-mint">Platform</FormLabel>
                     <FormControl>
-                      <Input {...field} className="bg-forest border-mint/20 text-white" placeholder="e.g., Sleeper, ESPN" />
+                      <Input {...field} className="bg-gray-50 text-sky-900 selection:bg-gray-200 dark:bg-forest dark:border-mint/20 dark:text-white" placeholder="e.g., Sleeper, ESPN" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -295,15 +295,15 @@ export const PostLeagueOpeningDialog = () => {
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-sm font-medium text-mint/80">Team Details</h3>
+              <h3 className="text-sm font-semibold text-sky-900 dark:text-mint/80">Team Details</h3>
               <FormField
                 control={form.control}
                 name="keyPlayers"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-mint">Key Players</FormLabel>
+                    <FormLabel className="text-sky-900 dark:text-mint">Key Players</FormLabel>
                     <FormControl>
-                      <Input {...field} className="bg-forest border-mint/20 text-white" placeholder="e.g., Justin Jefferson, Trevor Lawrence" />
+                      <Input {...field} className="bg-gray-50 text-sky-900 selection:bg-gray-200 dark:bg-forest dark:border-mint/20 dark:text-white" placeholder="e.g., Justin Jefferson, Trevor Lawrence" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -314,9 +314,9 @@ export const PostLeagueOpeningDialog = () => {
                 name="starters"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-mint">Current Starters</FormLabel>
+                    <FormLabel className="text-sky-900 dark:text-mint">Current Starters</FormLabel>
                     <FormControl>
-                      <Textarea {...field} className="bg-forest border-mint/20 text-white" placeholder="List your current starting lineup" />
+                      <Textarea {...field} className="bg-gray-50 text-sky-900 selection:bg-gray-200 dark:bg-forest dark:border-mint/20 dark:text-white" placeholder="List your current starting lineup" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -327,9 +327,9 @@ export const PostLeagueOpeningDialog = () => {
                 name="upcomingMatchup"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-mint">Upcoming Matchup</FormLabel>
+                    <FormLabel className="text-sky-900 dark:text-mint">Upcoming Matchup</FormLabel>
                     <FormControl>
-                      <Input {...field} className="bg-forest border-mint/20 text-white" placeholder="e.g., vs Team XYZ Week 5" />
+                      <Input {...field} className="bg-gray-50 text-sky-900 selection:bg-gray-200 dark:bg-forest dark:border-mint/20 dark:text-white" placeholder="e.g., vs Team XYZ Week 5" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -342,16 +342,16 @@ export const PostLeagueOpeningDialog = () => {
               name="comments"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-mint">Additional Comments</FormLabel>
+                  <FormLabel className="text-sky-900 dark:text-mint">Additional Comments</FormLabel>
                   <FormControl>
-                    <Textarea {...field} className="bg-forest border-mint/20 text-white" />
+                    <Textarea {...field} className="bg-gray-50 text-sky-900 selection:bg-gray-200 dark:bg-forest dark:border-mint/20 dark:text-white" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            <Button type="submit" className="w-full bg-mint hover:bg-mint/90 text-forest">
+            <Button type="submit" className="w-full bg-sky-900 text-gray-50 dark:bg-mint dark:hover:bg-mint/90 dark:text-forest">
               Post League Opening
             </Button>
             </form>

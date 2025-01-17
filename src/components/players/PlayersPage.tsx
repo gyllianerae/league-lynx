@@ -107,18 +107,18 @@ export const PlayersPage = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-foreground">Players</h2>
+        <h2 className="text-2xl font-bold text-sky-900 dark:text-mint">Players</h2>
         <Select
           value={selectedLeagueId}
           onValueChange={setSelectedLeagueId}
         >
-          <SelectTrigger className="w-[200px] bg-forest-light/50 border-mint/10 text-mint">
+          <SelectTrigger className="w-[200px] bg-gray-100 dark:bg-forest-light/50 dark:border-mint/10 text-sky-900 dark:text-mint">
             <SelectValue placeholder="All Leagues" />
           </SelectTrigger>
-          <SelectContent className="bg-forest-light/100 text-mint border border-mint/10 rounded-md">
-            <SelectItem value="all" className="hover:bg-mint/10 focus:bg-mint/20 text-mint cursor-pointer">All Leagues</SelectItem>
+          <SelectContent className="bg-gray-100 dark:bg-forest-light/100 text-sky-900 dark:text-mint border border-mint/10 rounded-md">
+            <SelectItem value="all" className="hover:bg-gray-200 dark:hover:bg-mint/10 focus:bg-gray-200 dark:focus:bg-mint/20 dark:text-mint cursor-pointer">All Leagues</SelectItem>
             {leagues?.map((league) => (
-              <SelectItem key={league.league_id} value={league.league_id} className="hover:bg-mint/10 focus:bg-mint/20 text-mint cursor-pointer">
+              <SelectItem key={league.league_id} value={league.league_id} className="hover:bg-gray-200 dark:hover:bg-mint/10 focus:bg-gray-200 dark:focus:bg-mint/20 dark:text-mint cursor-pointer">
                 {league.name}
               </SelectItem>
             ))}

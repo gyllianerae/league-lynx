@@ -92,7 +92,7 @@ export function PlayerProfile() {
         <div className="flex justify-start w-full">
           <Button 
             variant="ghost" 
-            className="text-mint hover:text-mint/80 transition-colors"
+            className="text-sky-900 dark:text-mint hover:text-mint/80 transition-colors"
             onClick={() => navigate(-1)}
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -103,7 +103,7 @@ export function PlayerProfile() {
         <div className="grid grid-cols-12 gap-6">
           {/* Main player card skeleton */}
           <div className="col-span-12 lg:col-span-8">
-            <Card className="bg-forest-light/50 backdrop-blur-xl p-6 border border-mint/10">
+            <Card className="bg-gray-100 dark:bg-forest-light/50 backdrop-blur-xl p-6 border border-mint/10">
               <Skeleton className="w-full h-[300px] rounded-lg mb-6" />
               <div className="space-y-4">
                 <Skeleton className="h-8 w-3/4" />
@@ -161,7 +161,7 @@ export function PlayerProfile() {
       <div className="flex justify-start w-full">
         <Button 
           variant="ghost" 
-          className="text-mint hover:text-mint/80 transition-colors group"
+          className="text-sky-900 dark:text-mint dark:hover:text-mint/80 transition-colors group"
           onClick={() => navigate(-1)}
         >
           <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" />
@@ -172,47 +172,47 @@ export function PlayerProfile() {
       <div className="grid grid-cols-12 gap-6">
         {/* Main player card */}
         <div className="col-span-12 lg:col-span-8">
-          <Card className="bg-forest-light/50 backdrop-blur-xl p-6 border border-mint/10 hover:border-mint/20 transition-all duration-300 shadow-lg h-full">
-            <div className="relative mb-6 group bg-forest">
+          <Card className="bg-gray-100 dark:bg-forest-light/50 backdrop-blur-xl p-6 border dark:border-mint/10 dark:hover:border-mint/20 transition-all duration-300 shadow-lg h-full">
+            <div className="relative mb-6 group bg-gray-200 dark:bg-forest rounded-lg">
               {player.image_url && (
                 <img
                   src={player.image_url}
                   alt={player.full_name}
-                  className="w-full h-[300px] object-cover object-top rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-[1.02]"
+                  className="w-full h-[300px] object-contain object-top rounded-lg shadow-lg transition-transform duration-300"
                 />
               )}
             </div>
 
             <div className="space-y-6">
               <div className="flex items-center justify-between">
-                <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
+                <h1 className="text-3xl md:text-4xl font-bold text-sky-900 dark:text-white tracking-tight">
                   {player.full_name}
                 </h1>
-                <span className="text-2xl font-bold text-mint bg-mint/10 px-3 py-1 rounded-full">
+                <span className="text-2xl font-bold text-sky-900 dark:text-mint dark:bg-mint/10 px-3 py-1 rounded-full">
                   {player.fantasy_positions?.[0]}
                 </span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="flex items-center gap-3 text-white/80 group">
-                  <Flag className="h-6 w-6 text-mint group-hover:scale-110 transition-transform" />
-                  <span className="text-lg group-hover:text-white transition-colors">{player.team || 'Free Agent'}</span>
+                <div className="flex items-center gap-3 text-sky-900 dark:text-white/80 group">
+                  <Flag className="h-6 w-6 text-sky-900 dark:text-mint group-hover:scale-110 transition-transform" />
+                  <span className="text-lg transition-colors">{player.team || 'Free Agent'}</span>
                 </div>
-                <div className="flex items-center gap-3 text-white/80 group">
-                  <Hash className="h-6 w-6 text-mint group-hover:scale-110 transition-transform" />
-                  <span className="text-lg group-hover:text-white transition-colors">Number: {player.number || 'N/A'}</span>
+                <div className="flex items-center gap-3 text-sky-900 dark:text-white/80 group">
+                  <Hash className="h-6 w-6 text-sky-900 dark:text-mint group-hover:scale-110 transition-transform" />
+                  <span className="text-lg transition-colors">Number: {player.number || 'N/A'}</span>
                 </div>
-                <div className="flex items-center gap-3 text-white/80 group">
-                  <School className="h-6 w-6 text-mint group-hover:scale-110 transition-transform" />
-                  <span className="text-lg group-hover:text-white transition-colors">College: {player.college || 'N/A'}</span>
+                <div className="flex items-center gap-3 text-sky-900 dark:text-white/80 group">
+                  <School className="h-6 w-6 text-sky-900 dark:text-mint group-hover:scale-110 transition-transform" />
+                  <span className="text-lg transition-colors">College: {player.college || 'N/A'}</span>
                 </div>
-                <div className="flex items-center gap-3 text-white/80 group">
-                  <Ruler className="h-6 w-6 text-mint group-hover:scale-110 transition-transform" />
-                  <span className="text-lg group-hover:text-white transition-colors">Height: {player.height || 'N/A'}</span>
+                <div className="flex items-center gap-3 text-sky-900 dark:text-white/80 group">
+                  <Ruler className="h-6 w-6 text-sky-900 dark:text-mint group-hover:scale-110 transition-transform" />
+                  <span className="text-lg transition-colors">Height: {player.height || 'N/A'}</span>
                 </div>
-                <div className="flex items-center gap-3 text-white/80 group">
-                  <Weight className="h-6 w-6 text-mint group-hover:scale-110 transition-transform" />
-                  <span className="text-lg group-hover:text-white transition-colors">Weight: {player.weight ? `${player.weight} lbs` : 'N/A'}</span>
+                <div className="flex items-center gap-3 text-sky-900 dark:text-white/80 group">
+                  <Weight className="h-6 w-6 text-sky-900 dark:text-mint group-hover:scale-110 transition-transform" />
+                  <span className="text-lg transition-colors">Weight: {player.weight ? `${player.weight} lbs` : 'N/A'}</span>
                 </div>
               </div>
             </div>
@@ -221,15 +221,15 @@ export function PlayerProfile() {
 
         {/* Quick stats card */}
         <div className="col-span-12 lg:col-span-4">
-          <Card className="bg-forest-light/50 backdrop-blur-xl p-6 border border-mint/10 hover:border-mint/20 transition-all duration-300 shadow-lg h-full">
+          <Card className="bg-gray-100 dark:bg-forest-light/50 backdrop-blur-xl p-6 border dark:border-mint/10 hover:border-mint/20 transition-all duration-300 shadow-lg h-full">
             <PlayerStats player={player} showQuickStatsOnly={true} />
           </Card>
         </div>
 
         {/* League Availability Card */}
         <div className="col-span-12">
-          <Card className="bg-forest-light/50 backdrop-blur-xl p-6 border border-mint/10 hover:border-mint/20 transition-all duration-300 shadow-lg">
-            <h2 className="text-xl font-semibold text-mint mb-6 flex items-center gap-2">
+          <Card className="bg-gray-100 dark:bg-forest-light/50 backdrop-blur-xl p-6 border dark:border-mint/10 dark:hover:border-mint/20 transition-all duration-300 shadow-lg">
+            <h2 className="text-xl font-semibold text-sky-900 dark:text-mint mb-6 flex items-center gap-2">
               League Availability
             </h2>
             {isLoadingLeagues || isLoadingRosters ? (
@@ -243,14 +243,14 @@ export function PlayerProfile() {
                 {leagueAvailability.map((league, index) => (
                   <div 
                     key={index}
-                    className="p-4 rounded-lg bg-forest-light/30 border border-mint/10 hover:border-mint/20 transition-all group"
+                    className="p-4 rounded-lg bg-gray-200 dark:bg-forest-light/30 border dark:border-mint/10 dark:hover:border-mint/20 transition-all group"
                   >
-                    <div className="font-medium text-white mb-2 text-start">{league.league_name}</div>
+                    <div className="font-medium text-sky-900 dark:text-white mb-2 text-start">{league.league_name}</div>
                     <div className="flex items-center gap-2 text-sm">
                       {league.is_available ? (
                         <>
-                          <Check className="h-4 w-4 text-green-400" />
-                          <span className="text-green-400">Available</span>
+                          <Check className="h-4 w-4 text-green-700 dark:text-green-400" />
+                          <span className="text-green-700 dark:text-green-400">Available</span>
                         </>
                       ) : (
                         <>
@@ -272,7 +272,7 @@ export function PlayerProfile() {
 
         {/* Detailed stats card */}
         <div className="col-span-12">
-          <Card className="bg-forest-light/50 backdrop-blur-xl p-6 border border-mint/10 hover:border-mint/20 transition-all duration-300 shadow-lg">
+          <Card className="bg-gray-100 dark:bg-forest-light/50 backdrop-blur-xl p-6 border dark:border-mint/10 dark:hover:border-mint/20 transition-all duration-300 shadow-lg">
             <PlayerStats player={player} showDetailedStatsOnly={true} />
           </Card>
         </div>
@@ -284,12 +284,12 @@ export function PlayerProfile() {
 
         {/* Performance and Price charts */}
         <div className="col-span-12 lg:col-span-6">
-          <Card className="bg-forest-light/50 backdrop-blur-xl p-6 border border-mint/10 hover:border-mint/20 transition-all duration-300 shadow-lg">
+          <Card className="bg-gray-100 dark:bg-forest-light/50 backdrop-blur-xl p-6 border dark:border-mint/10 dark:hover:border-mint/20 transition-all duration-300 shadow-lg">
             <PerformanceChart />
           </Card>
         </div>
         <div className="col-span-12 lg:col-span-6">
-          <Card className="bg-forest-light/50 backdrop-blur-xl p-6 border border-mint/10 hover:border-mint/20 transition-all duration-300 shadow-lg">
+          <Card className="bg-gray-100 dark:bg-forest-light/50 backdrop-blur-xl p-6 border dark:border-mint/10 dark:hover:border-mint/20 transition-all duration-300 shadow-lg">
             <PriceChart />
           </Card>
         </div>

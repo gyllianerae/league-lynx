@@ -33,12 +33,12 @@ export const YearSelector = ({ selectedYear, onYearChange }: YearSelectorProps) 
       value={selectedYear}
       onValueChange={handleYearChange}
     >
-      <SelectTrigger className="w-[120px] bg-forest-light/50 backdrop-blur-md text-mint border-mint/10">
+      <SelectTrigger className="w-[120px] bg-gray-50 dark:bg-forest-light/50 backdrop-blur-md text-sky-900 dark:text-mint dark:border-mint/10">
         <SelectValue placeholder="Select year" />
       </SelectTrigger>
-      <SelectContent className="bg-forest-light/90 backdrop-blur-md border-mint/10">
-        <SelectItem value="2024" className="text-mint hover:bg-forest-light/50">2024</SelectItem>
-        <SelectItem value="2025" className="text-mint hover:bg-forest-light/50">2025</SelectItem>
+      <SelectContent className="bg-gray-50 dark:bg-forest-light/90 border-mint/10">
+        <SelectItem value="2024" className="text-sky-900 dark:text-mint hover:bg-gray-100 hover:cursor-pointer dark:hover:bg-forest-light/100">2024</SelectItem>
+        <SelectItem value="2025" className="text-sky-900 dark:text-mint hover:bg-gray-100 hover:cursor-pointer dark:hover:bg-forest-light/100">2025</SelectItem>
       </SelectContent>
     </Select>
   );

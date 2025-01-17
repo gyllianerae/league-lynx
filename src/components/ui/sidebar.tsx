@@ -92,7 +92,7 @@ export function SidebarTrigger() {
   return (
     <button
       onClick={() => setCollapsed(!collapsed)}
-      className="fixed top-1/2 -translate-y-1/2 mt-8 -right-3 p-1.5 rounded-full bg-mint/10 hover:bg-mint/20 text-mint transition-colors duration-200 z-30"
+      className="fixed top-1/2 -translate-y-1/2 mt-8 -right-3 p-1.5 rounded-full bg-sky-900 text-gray-100 dark:bg-mint/10 dark:hover:bg-mint/20 dark:text-mint transition-colors duration-200 z-30"
       aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
     >
       {collapsed ? (

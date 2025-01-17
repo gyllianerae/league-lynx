@@ -143,15 +143,15 @@ export const PlayerUpdatesSection = ({ players }: PlayerUpdatesSectionProps) => 
   );
 
   return (
-    <Card className="bg-forest-light/30 border-mint/10">
+    <Card className="bg-gray-100 dark:bg-forest-light/30 dark:border-mint/10">
       <CardHeader className="flex flex-row justify-between items-center p-6">
         <div className="flex items-center gap-2">
           <div className="h-2 w-2 bg-red-500 rounded-full animate-pulse" />
-          <h2 className="text-2xl font-bold text-foreground">My Player Updates</h2>
+          <h2 className="text-2xl font-bold text-sky-900 dark:text-mint">My Player Updates</h2>
         </div>
         <Link 
           to="/players/updates" 
-          className="text-mint hover:text-mint/80 flex items-center gap-1"
+          className="text-sky-900 dark:text-mint dark:hover:text-mint/80 flex items-center gap-1"
         >
           View All
           <ArrowRight className="h-4 w-4" />
@@ -160,9 +160,9 @@ export const PlayerUpdatesSection = ({ players }: PlayerUpdatesSectionProps) => 
 
       <CardContent className="p-4">
         <Tabs defaultValue="status" className="w-full">
-          <TabsList className="bg-forest-light/30">
-            <TabsTrigger value="status">Status Updates</TabsTrigger>
-            <TabsTrigger value="news" disabled>Latest News</TabsTrigger>
+          <TabsList className="bg-gray-50 dark:bg-forest-light/30 text-sky-900">
+            <TabsTrigger value="status" className="data-[state=active]:text-sky-900">Status Updates</TabsTrigger>
+            <TabsTrigger value="news" className="data-[state=active]:text-sky-900" disabled>Latest News</TabsTrigger>
           </TabsList>
 
           <TabsContent value="status">

@@ -119,7 +119,7 @@ const DashboardPage = () => {
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
+        <h1 className="text-3xl font-bold text-sky-900 dark:text-mint">Dashboard</h1>
         <div className="flex gap-2">
           <YearSelector 
             selectedYear={selectedYear} 
@@ -130,17 +130,17 @@ const DashboardPage = () => {
             <DropdownMenuTrigger asChild>
               <Button 
                 variant="outline" 
-                className="bg-forest-light/50 backdrop-blur-md text-mint border-mint/10 hover:bg-forest-light/70 hover:text-mint/90"
+                className="bg-gray-50 dark:bg-forest-light/50 backdrop-blur-md dark:border-mint/10 text-sky-900 dark:text-mint hover:bg-gray-200 dark:hover:bg-forest-light/90"
               >
                 <ExternalLink className="w-4 h-4 mr-2" />
                 External Links
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-forest-light/90 backdrop-blur-md border-mint/10">
+            <DropdownMenuContent className="bg-gray-50 dark:bg-forest-light/90 backdrop-blur-md dark:border-mint/10">
               {EXTERNAL_LINKS.map((link) => (
                 <DropdownMenuItem
                   key={link.name}
-                  className="text-mint hover:bg-forest-light/50 cursor-pointer"
+                  className="text-sky-900 dark:text-mint hover:bg-gray-100 dark:hover:bg-forest-light/50 cursor-pointer"
                   onClick={() => window.open(link.url, '_blank')}
                 >
                   {link.name}
@@ -153,24 +153,24 @@ const DashboardPage = () => {
 
       <WelcomeBanner />
       
-      <Card className="bg-forest-light/30 border-none shadow-lg backdrop-blur-md p-6">
+      <Card className="bg-gray-100 dark:bg-forest-light/30 border-none shadow-lg backdrop-blur-md p-6">
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="bg-forest-light/50 backdrop-blur-md border-none w-full justify-start mb-6">
+          <TabsList className="bg-gray-200 dark:bg-forest-light/50 backdrop-blur-md border-none w-full justify-start mb-6">
             <TabsTrigger 
               value="overview"
-              className="text-[#F1F1F1] data-[state=active]:bg-mint/10 data-[state=active]:text-mint"
+              className="text-sky-900 dark:text-[#F1F1F1] data-[state=active]:bg-gray-100 data-[state=active]:text-sky-900 dark:data-[state=active]:bg-mint/10 dark:data-[state=active]:text-mint"
             >
               Overview
             </TabsTrigger>
             <TabsTrigger 
               value="players"
-              className="text-[#F1F1F1] data-[state=active]:bg-mint/10 data-[state=active]:text-mint"
+              className="text-sky-900 dark:text-[#F1F1F1] data-[state=active]:bg-gray-100 data-[state=active]:text-sky-900 dark:data-[state=active]:bg-mint/10 dark:data-[state=active]:text-mint"
             >
               Players
             </TabsTrigger>
             <TabsTrigger 
               value="news"
-              className="text-[#F1F1F1] data-[state=active]:bg-mint/10 data-[state=active]:text-mint"
+              className="text-sky-900 dark:text-[#F1F1F1] data-[state=active]:bg-gray-100 data-[state=active]:text-sky-900 dark:data-[state=active]:bg-mint/10 dark:data-[state=active]:text-mint"
             >
               News
             </TabsTrigger>

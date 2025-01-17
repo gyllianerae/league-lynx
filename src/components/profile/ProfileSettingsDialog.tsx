@@ -103,30 +103,30 @@ export function ProfileSettingsDialog({ open, onOpenChange }: ProfileSettingsDia
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-forest-light/30 backdrop-blur-xl border border-mint/10">
+      <DialogContent className="sm:max-w-md bg-gray-100 dark:bg-forest-light/30 backdrop-blur-xl border dark:border-mint/10">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-mint text-center">
+          <DialogTitle className="text-2xl font-bold text-sky-900 dark:text-mint text-center">
             Profile Settings
           </DialogTitle>
         </DialogHeader>
         <div className="space-y-6 py-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-mint/80">Your Role</label>
+            <label className="text-sm font-medium text-sky-900 dark:text-mint/80">Your Role</label>
             <Select value={role} onValueChange={(value: UserRole) => setRole(value)}>
-              <SelectTrigger className="w-full bg-forest-dark/50 border-mint/20 text-mint">
+              <SelectTrigger className="w-full bg-gray-50 text-sky-900 dark:bg-forest-dark/50 dark:border-mint/20 dark:text-mint">
                 <SelectValue placeholder="Select your role" />
               </SelectTrigger>
               <SelectContent
-                className="bg-forest-light/100 text-mint border border-mint/10 rounded-md"
+                className="bg-gray-50 dark:bg-forest-light/100 dark:text-mint border dark:border-mint/10 rounded-md"
                 position="popper"
                 sideOffset={5}
                 align="start"
                 side="top"
               >
-                <SelectItem value="regular_user" className="text-mint hover:bg-mint/10 focus:bg-mint/20 cursor-pointer">
+                <SelectItem value="regular_user" className="text-sky-900 hover:bg-gray-100 dark:text-mint dark:hover:bg-mint/10 dark:focus:bg-mint/20 cursor-pointer">
                   Regular User (Fantasy Football Participant)
                 </SelectItem>
-                <SelectItem value="commissioner" className="text-mint hover:bg-mint/10 focus:bg-mint/20 cursor-pointer">
+                <SelectItem value="commissioner" className="text-sky-900 hover:bg-gray-100 dark:text-mint dark:hover:bg-mint/10 dark:focus:bg-mint/20 cursor-pointer">
                   Commissioner (Manages Leagues)
                 </SelectItem>
               </SelectContent>
@@ -136,7 +136,7 @@ export function ProfileSettingsDialog({ open, onOpenChange }: ProfileSettingsDia
           <Button
             onClick={handleSubmit}
             disabled={isLoading}
-            className="w-full bg-mint hover:bg-mint/90 text-forest"
+            className="w-full bg-sky-900 text-gray-100 dark:bg-mint dark:hover:bg-mint/90 dark:text-forest"
           >
             {isLoading ? "Saving..." : "Save Changes"}
           </Button>

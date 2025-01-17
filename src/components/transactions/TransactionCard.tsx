@@ -9,13 +9,13 @@ import { SleeperTransaction, TransactionType } from "@/types/sleeper/transaction
 const getTransactionIcon = (type: TransactionType) => {
   switch (type) {
     case 'free_agent':
-      return <Download className="h-5 w-5 text-mint" />;
+      return <Download className="h-5 w-5 text-sky-900 dark:text-mint" />;
     case 'trade':
-      return <ArrowLeftRight className="h-5 w-5 text-mint" />;
+      return <ArrowLeftRight className="h-5 w-5 text-sky-900 dark:text-mint" />;
     case 'waiver':
-      return <Clock className="h-5 w-5 text-mint" />;
+      return <Clock className="h-5 w-5 text-sky-900 dark:text-mint" />;
     default:
-      return <Download className="h-5 w-5 text-mint" />;
+      return <Download className="h-5 w-5 text-sky-900 dark:text-mint" />;
   }
 };
 
@@ -39,28 +39,28 @@ interface TransactionCardProps {
 
 export const TransactionCard = ({ transaction, leagueName }: TransactionCardProps) => {
   return (
-    <Card className="p-6 bg-forest-light/30 border-mint/10">
+    <Card className="p-6 bg-gray-50 dark:bg-forest-light/30 border-mint/10">
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             {getTransactionIcon(transaction.type)}
             <div className="flex flex-col">
-              <span className="text-lg font-semibold text-mint">
+              <span className="text-lg font-semibold text-sky-900 dark:text-mint text-start">
                 {getTransactionTitle(transaction.type)}
               </span>
-              <span className="text-sm text-white/60">{leagueName}</span>
+              <span className="text-sm text-gray-500 dark:text-white/60">{leagueName}</span>
             </div>
           </div>
-          <span className="text-sm text-white/60">
+          <span className="text-sm text-gray-500 dark:text-white/60">
             {format(new Date(transaction.created), "MMM d, yyyy h:mm a")}
           </span>
         </div>
 
-        <div className="flex items-center gap-2 text-white/60">
+        <div className="flex items-center gap-2 text-sky-900 dark:text-white/60">
           <Users className="h-4 w-4" />
           <span>Teams Involved:</span>
           {transaction.roster_ids.map((rosterId, index) => (
-            <span key={rosterId} className="text-mint">
+            <span key={rosterId} className="text-sky-900 dark:text-mint">
               Team {rosterId}
               {index < transaction.roster_ids.length - 1 ? ", " : ""}
             </span>
@@ -68,10 +68,10 @@ export const TransactionCard = ({ transaction, leagueName }: TransactionCardProp
         </div>
 
         {transaction.waiver_budget && transaction.waiver_budget.length > 0 && (
-          <div className="text-white/60">
+          <div className="dark:text-white/60">
             FAAB Transfers:
             {transaction.waiver_budget.map((budget, index) => (
-              <span key={index} className="ml-2 text-mint">
+              <span key={index} className="ml-2 dark:text-mint">
                 Team {budget.sender} sends ${budget.amount} to Team {budget.receiver}
               </span>
             ))}
@@ -80,25 +80,25 @@ export const TransactionCard = ({ transaction, leagueName }: TransactionCardProp
 
         {transaction.adds && Object.keys(transaction.adds).length > 0 && (
           <div className="">
-            <div className="text-green-400 mb-2 text-start">Added Players</div>
+            <div className="text-green-600 dark:text-green-400 mb-2 text-start">Added Players</div>
             {Object.entries(transaction.adds).map(([playerId, rosterId]) => (
               <div
                 key={playerId}
                 className="flex items-center justify-between p-3 rounded-lg bg-forest-dark/50 mb-2"
               >
                 <div className="flex items-center gap-3">
-                  <Avatar className="h-8 w-8">
+                  <Avatar className="h-8 w-8 bg-sky-900 text-gray-50 dark:bg-mint dark:text-forest">
                     <AvatarImage src={getAvatarUrl(playerId)} alt={playerId} />
                     <AvatarFallback>{playerId.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                   <div>
-                    <div className="font-medium text-white">Player ID: {playerId}</div>
-                    <div className="text-sm text-white/60">
+                    <div className="font-medium text-sky-900 dark:text-white">Player ID: {playerId}</div>
+                    <div className="text-sm text-start text-sky-900 dark:text-white/60">
                       To: Team {rosterId}
                     </div>
                   </div>
                 </div>
-                <Badge variant="outline" className="text-mint border-mint/20">
+                <Badge variant="outline" className="text-sky-900 dark:text-mint dark:border-mint/20">
                   Added
                 </Badge>
               </div>

@@ -93,22 +93,22 @@ export const MyPlayersPage = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-foreground">My Players</h2>
+        <h2 className="text-2xl font-bold text-sky-900 dark:text-mint">My Players</h2>
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button 
                 variant="outline" 
-                className="bg-forest-light/30 hover:bg-forest-light/40 text-mint border-mint/20"
+                className="bg-gray-100 dark:bg-forest-light/30 hover:bg-forest-light/40 hover:bg-gray-200 text-sky-900 dark:text-mint dark:border-mint/20"
               >
                 <Filter className="h-4 w-4 mr-2" />
                 Leagues
                 <ChevronDown className="h-4 w-4 ml-2" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-forest-light/95 border-mint/20">
+            <DropdownMenuContent className="bg-gray-100 dark:bg-forest-light/95 dark:border-mint/20 h-96 overflow-y-auto">
               <DropdownMenuItem 
-                className="text-white hover:text-mint hover:bg-forest-light/80"
+                className="bg-gray-200 text-sky-900 dark:text-white dark:hover:text-mint dark:hover:bg-forest-light/80"
                 onClick={() => setSelectedLeague(null)}
               >
                 All Leagues
@@ -116,7 +116,7 @@ export const MyPlayersPage = () => {
               {leagues?.map((league) => (
                 <DropdownMenuItem
                   key={league.league_id}
-                  className="text-white hover:text-mint hover:bg-forest-light/80"
+                  className="hover:bg-gray-200 text-sky-900 dark:text-white hover:text-sky-900 hover:cursor-pointer dark:hover:text-mint dark:hover:bg-forest-light/80"
                   onClick={() => setSelectedLeague(league.league_id)}
                 >
                   {league.name}

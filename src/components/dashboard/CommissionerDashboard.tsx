@@ -49,6 +49,14 @@ interface ManagedTeam {
   team_status?: 'active' | 'open' | 'orphaned';
 }
 
+interface PlayerDetails {
+  player_id: string;
+  full_name: string;
+  position: string;
+  team?: string;
+  injury_status?: string;
+}
+
 export const CommissionerDashboard = () => {
   const [selectedTeam, setSelectedTeam] = useState<ManagedTeam | null>(null);
   const [isStatsOpen, setIsStatsOpen] = useState(false);
@@ -71,6 +79,26 @@ export const CommissionerDashboard = () => {
       if (error) throw error;
       return data;
     }
+  });
+
+  // Add a new query for player details
+  const { data: playerDetails } = useQuery({
+    queryKey: ['player-details'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('players')
+        .select('player_id, full_name, position, team, injury_status');
+      
+      if (error) throw error;
+      
+      // Create a map of player_id to player details for easier lookup
+      const playerMap = new Map<string, PlayerDetails>();
+      data?.forEach(player => {
+        playerMap.set(player.player_id, player);
+      });
+      
+      return playerMap;
+    },
   });
 
   // Then fetch Sleeper user data and leagues
@@ -171,12 +199,12 @@ export const CommissionerDashboard = () => {
 
   if (isProfileLoading || isTeamsLoading) {
     return (
-      <Card className="bg-forest-light/30 border-mint/10">
+      <Card className="bg-gray-100 dark:bg-forest-light/30 dark:border-mint/10">
         <CardContent className="p-8">
           <div className="flex flex-col items-center justify-center text-center">
-            <Star className="h-12 w-12 text-mint/40 mb-4" />
-            <h3 className="text-xl font-semibold text-mint mb-2">Loading Teams</h3>
-            <p className="text-white/60">
+            <Star className="h-12 w-12 text-sky-900 dark:text-mint/40 mb-4" />
+            <h3 className="text-xl font-semibold text-sky-900 dark:text-mint mb-2">Loading Teams</h3>
+            <p className="text-gray-500 dark:text-white/60">
               Fetching your managed teams...
             </p>
           </div>
@@ -187,12 +215,12 @@ export const CommissionerDashboard = () => {
 
   if (!managedTeams || managedTeams.length === 0) {
     return (
-      <Card className="bg-forest-light/30 border-mint/10">
+      <Card className="bg-gray-100 dark:bg-forest-light/30 dark:border-mint/10">
         <CardContent className="p-8">
           <div className="flex flex-col items-center justify-center text-center">
-            <Star className="h-12 w-12 text-mint/40 mb-4" />
-            <h3 className="text-xl font-semibold text-mint mb-2">No Teams Found</h3>
-            <p className="text-white/60">
+            <Star className="h-12 w-12 text-sky-900 dark:text-mint/40 mb-4" />
+            <h3 className="text-xl font-semibold text-sky-900 dark:text-mint mb-2">No Teams Found</h3>
+            <p className="text-gray-500 dark:text-white/60">
               You haven't added any teams to manage yet.
             </p>
           </div>
@@ -201,30 +229,40 @@ export const CommissionerDashboard = () => {
     );
   }
 
+  const getPlayerDisplay = (playerId: string) => {
+    const player = playerDetails?.get(playerId);
+    if (!player) return playerId;
+    
+    const injuryBadge = player.injury_status ? 
+      `[${player.injury_status}] ` : '';
+    
+    return `${player.full_name} (${player.position}${player.team ? ` - ${player.team}` : ''}) ${injuryBadge}`;
+  };
+
   return (
     <>
-      <Card className="bg-forest-light/30 border-mint/10">
+      <Card className="dark:bg-forest-light/30 dark:border-mint/10">
         <CardContent className="p-4">
           <ScrollArea className="h-[400px] w-full">
             <Table>
               <TableHeader>
                 <TableRow className="border-none">
-                  <TableHead className="text-[#F1F1F1] font-bold">Team Name</TableHead>
-                  <TableHead className="text-[#F1F1F1] font-bold">League Name</TableHead>
-                  <TableHead className="text-[#F1F1F1] font-bold">Platform</TableHead>
-                  <TableHead className="text-[#F1F1F1] font-bold">Record</TableHead>
-                  <TableHead className="text-[#F1F1F1] font-bold">Status</TableHead>
-                  <TableHead className="text-[#F1F1F1] font-bold w-[50px]"></TableHead>
+                  <TableHead className="text-sky-900 dark:text-[#F1F1F1] font-bold">Team Name</TableHead>
+                  <TableHead className="text-sky-900 dark:text-[#F1F1F1] font-bold">League Name</TableHead>
+                  <TableHead className="text-sky-900 dark:text-[#F1F1F1] font-bold">Platform</TableHead>
+                  <TableHead className="text-sky-900 dark:text-[#F1F1F1] font-bold">Record</TableHead>
+                  <TableHead className="text-sky-900 dark:text-[#F1F1F1] font-bold">Status</TableHead>
+                  <TableHead className="text-sky-900 dark:text-[#F1F1F1] font-bold w-[50px]"></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {managedTeams?.map((team) => (
                   <TableRow 
                     key={`${team.league_id}-${team.team_name}`}
-                    className="border-none hover:bg-forest-light/50 transition-colors"
+                    className="border-none hover:bg-gray-200 dark:hover:bg-forest-light/50 transition-colors"
                   >
                     <TableCell 
-                      className="text-[#F1F1F1] cursor-pointer"
+                      className="text-sky-900 dark:text-[#F1F1F1] cursor-pointer"
                       onClick={() => {
                         setSelectedTeam(team);
                         setIsStatsOpen(true);
@@ -233,21 +271,21 @@ export const CommissionerDashboard = () => {
                       <div className="flex items-center gap-2">
                         <Avatar className="w-6 h-6">
                           <AvatarImage src={getAvatarUrl(team.league_id)} alt={team.team_name} />
-                          <AvatarFallback className="bg-forest text-mint text-xs">
+                          <AvatarFallback className="bg-gray-200 dark:bg-forest dark:text-mint text-xs">
                             {team.team_name.charAt(0)}
                           </AvatarFallback>
                         </Avatar>
                         <span>{team.team_name}</span>
                       </div>
                     </TableCell>
-                    <TableCell className="text-[#F1F1F1]">{team.league_name}</TableCell>
-                    <TableCell className="text-[#F1F1F1]">{team.platform}</TableCell>
-                    <TableCell className="text-[#F1F1F1]">{team.record}</TableCell>
-                    <TableCell className="text-[#F1F1F1]">
+                    <TableCell className="text-sky-900 dark:text-[#F1F1F1]">{team.league_name}</TableCell>
+                    <TableCell className="text-sky-900 dark:text-[#F1F1F1]">{team.platform}</TableCell>
+                    <TableCell className="text-sky-900 dark:text-[#F1F1F1]">{team.record}</TableCell>
+                    <TableCell className="text-sky-900 dark:text-[#F1F1F1]">
                       <span className={`px-2 py-1 rounded-full text-sm ${
                         team.team_status === 'open' ? 'bg-yellow-500/20 text-yellow-300' :
                         team.team_status === 'orphaned' ? 'bg-red-500/20 text-red-300' :
-                        'bg-green-500/20 text-green-300'
+                        'bg-green-700 dark:bg-green-500/20 text-green-300'
                       }`}>
                         {team.team_status || 'Active'}
                       </span>
@@ -256,12 +294,12 @@ export const CommissionerDashboard = () => {
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button variant="ghost" className="h-8 w-8 p-0">
-                            <MoreVertical className="h-4 w-4 text-mint" />
+                            <MoreVertical className="h-4 w-4 text-sky-900 dark:text-mint" />
                           </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="bg-forest-light border-mint/10">
+                        <DropdownMenuContent align="end" className="bg-gray-100 dark:bg-forest-light dark:border-mint/10">
                           <DropdownMenuItem
-                            className="text-[#F1F1F1] hover:bg-forest-light/50 cursor-pointer"
+                            className="text-sky-900 hover:bg-gray-200 dark:text-[#F1F1F1] dark:hover:bg-forest-light/50 cursor-pointer"
                             onClick={() => updateTeamStatus.mutate({
                               leagueId: team.league_id,
                               teamName: team.team_name,
@@ -271,7 +309,7 @@ export const CommissionerDashboard = () => {
                             Mark as Active
                           </DropdownMenuItem>
                           <DropdownMenuItem
-                            className="text-[#F1F1F1] hover:bg-forest-light/50 cursor-pointer"
+                            className="text-sky-900 hover:bg-gray-200 dark:text-[#F1F1F1] dark:hover:bg-forest-light/50 cursor-pointer"
                             onClick={() => updateTeamStatus.mutate({
                               leagueId: team.league_id,
                               teamName: team.team_name,
@@ -281,7 +319,7 @@ export const CommissionerDashboard = () => {
                             Mark as Open
                           </DropdownMenuItem>
                           <DropdownMenuItem
-                            className="text-[#F1F1F1] hover:bg-forest-light/50 cursor-pointer"
+                            className="text-sky-900 hover:bg-gray-200 dark:text-[#F1F1F1] dark:hover:bg-forest-light/50 cursor-pointer"
                             onClick={() => updateTeamStatus.mutate({
                               leagueId: team.league_id,
                               teamName: team.team_name,
@@ -302,9 +340,9 @@ export const CommissionerDashboard = () => {
       </Card>
 
       <Dialog open={isStatsOpen} onOpenChange={setIsStatsOpen}>
-        <DialogContent className="bg-forest-light/95 border-mint/10 text-white max-h-[80vh] overflow-hidden">
+        <DialogContent className="bg-gray-100 dark:bg-forest-light/95 dark:border-mint/10 dark:text-white max-h-[80vh] overflow-hidden">
           <DialogHeader>
-            <DialogTitle className="text-mint text-xl">Team Details</DialogTitle>
+            <DialogTitle className="text-sky-900 dark:text-mint text-xl">Team Details</DialogTitle>
           </DialogHeader>
           <ScrollArea className="h-[60vh] w-full pr-4">
             {selectedTeam && (
@@ -312,41 +350,41 @@ export const CommissionerDashboard = () => {
                 <div className="flex items-center gap-3 mb-6">
                   <Avatar className="w-12 h-12">
                     <AvatarImage src={getAvatarUrl(selectedTeam.league_id)} alt={selectedTeam.team_name} />
-                    <AvatarFallback className="bg-forest text-mint">
+                    <AvatarFallback className="bg-gray-200 text-sky-900 dark:bg-forest dark:text-mint">
                       {selectedTeam.team_name.charAt(0)}
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <h3 className="text-lg font-semibold text-mint">{selectedTeam.team_name}</h3>
-                    <p className="text-white/60">{selectedTeam.league_name}</p>
+                    <h3 className="text-lg font-semibold text-sky-900 dark:text-mint">{selectedTeam.team_name}</h3>
+                    <p className="text-gray-500 dark:text-white/60">{selectedTeam.league_name}</p>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <p className="text-white/60">Platform</p>
-                    <p className="text-white">{selectedTeam.platform}</p>
+                    <p className="text-sky-900 font-semibold dark:text-white/60">Platform</p>
+                    <p className="text-gray-500 dark:text-white">{selectedTeam.platform}</p>
                   </div>
                   <div className="space-y-2">
-                    <p className="text-white/60">Rank</p>
-                    <p className="text-white">{selectedTeam.rank || '-'}</p>
+                    <p className="text-sky-900 font-semibold dark:text-white/60">Rank</p>
+                    <p className="text-gray-500 dark:text-white">{selectedTeam.rank || '-'}</p>
                   </div>
                 </div>
 
                 <div className="pt-4">
-                  <h4 className="text-lg font-semibold text-mint mb-2">Record</h4>
-                  <div className="grid grid-cols-3 gap-4 bg-forest-light/30 p-4 rounded-md">
+                  <h4 className="text-lg font-semibold dark:text-mint text-sky-900 mb-2">Record</h4>
+                  <div className="grid grid-cols-3 gap-4 bg-gray-200 dark:bg-forest-light/30 p-4 rounded-md">
                     <div>
-                      <p className="text-white/60">Wins</p>
-                      <p className="text-white text-lg">{selectedTeam.wins || 0}</p>
+                      <p className="text-sky-900 dark:text-white/60">Wins</p>
+                      <p className="text-gray-700 dark:text-white text-lg">{selectedTeam.wins || 0}</p>
                     </div>
                     <div>
-                      <p className="text-white/60">Losses</p>
-                      <p className="text-white text-lg">{selectedTeam.losses || 0}</p>
+                      <p className="text-sky-900 dark:text-white/60">Losses</p>
+                      <p className="text-gray-700 dark:text-white text-lg">{selectedTeam.losses || 0}</p>
                     </div>
                     <div>
-                      <p className="text-white/60">Ties</p>
-                      <p className="text-white text-lg">{selectedTeam.ties || 0}</p>
+                      <p className="text-sky-900 dark:text-white/60">Ties</p>
+                      <p className="text-gray-700 dark:text-white text-lg">{selectedTeam.ties || 0}</p>
                     </div>
                   </div>
                 </div>
@@ -361,20 +399,24 @@ export const CommissionerDashboard = () => {
                       <CollapsibleTrigger asChild>
                         <Button
                           variant="ghost"
-                          className="flex w-full items-center justify-between p-4 hover:bg-forest-light/30"
+                          className="flex w-full items-center justify-between p-4 hover:bg-gray-200 dark:hover:bg-forest-light/30"
                         >
-                          <span className="text-lg font-semibold text-mint">Starting Lineup</span>
+                          <span className="text-lg font-semibold text-sky-900 dark:text-mint">Starting Lineup</span>
                           <ChevronRight
-                            className={`h-4 w-4 text-mint transition-transform ${
+                            className={`h-4 w-4 text-sky-900 dark:text-mint transition-transform ${
                               isStartersExpanded ? "rotate-90" : ""
                             }`}
                           />
                         </Button>
                       </CollapsibleTrigger>
-                      <CollapsibleContent className="bg-forest-light/30 p-4 rounded-md mt-2">
-                        <p className="text-white whitespace-pre-line">
-                          {selectedTeam.starters.join('\n')}
-                        </p>
+                      <CollapsibleContent className="dark:bg-forest-light/30 p-4 rounded-md mt-2">
+                        <div className="space-y-2">
+                          {selectedTeam.starters.map((playerId, index) => (
+                            <p key={playerId} className="text-sky-900 dark:text-white">
+                              {index + 1}. {getPlayerDisplay(playerId)}
+                            </p>
+                          ))}
+                        </div>
                       </CollapsibleContent>
                     </Collapsible>
                   </div>

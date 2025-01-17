@@ -30,18 +30,18 @@ export const TeamOverview = ({ leagues, isLoading }: TeamOverviewProps) => {
 
   if (isLoading) {
     return (
-      <Card className="bg-forest-light/30 border-mint/10">
+      <Card className="bg-gray-100 dark:bg-forest-light/30 dark:border-mint/10">
         <CardContent className="p-4">
           <ScrollArea className="h-[400px] w-full">
             <Table>
               <TableHeader>
                 <TableRow className="border-none">
-                  <TableHead className="text-[#F1F1F1] font-bold">Team Name</TableHead>
-                  <TableHead className="text-[#F1F1F1] font-bold">League</TableHead>
-                  <TableHead className="text-[#F1F1F1] font-bold">Rank</TableHead>
-                  <TableHead className="text-[#F1F1F1] font-bold">Record</TableHead>
-                  <TableHead className="text-[#F1F1F1] font-bold text-right">Points For</TableHead>
-                  <TableHead className="text-[#F1F1F1] font-bold text-right">Points Against</TableHead>
+                  <TableHead className="text-sky-900 dark:text-[#F1F1F1] font-bold">Team Name</TableHead>
+                  <TableHead className="text-sky-900 dark:text-[#F1F1F1] font-bold">League</TableHead>
+                  <TableHead className="text-sky-900 dark:text-[#F1F1F1] font-bold">Rank</TableHead>
+                  <TableHead className="text-sky-900 dark:text-[#F1F1F1] font-bold">Record</TableHead>
+                  <TableHead className="text-sky-900 dark:text-[#F1F1F1] font-bold text-right">Points For</TableHead>
+                  <TableHead className="text-sky-900 dark:text-[#F1F1F1] font-bold text-right">Points Against</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -49,20 +49,20 @@ export const TeamOverview = ({ leagues, isLoading }: TeamOverviewProps) => {
                   <TableRow key={index} className="border-none">
                     <TableCell>
                       <div className="flex items-center gap-2">
-                        <Skeleton className="h-6 w-6 rounded-full bg-forest-light/50" />
-                        <Skeleton className="h-4 w-32 bg-forest-light/50" />
+                        <Skeleton className="h-6 w-6 rounded-full bg-gray-300 dark:bg-forest-light/50" />
+                        <Skeleton className="h-4 w-32 bg-gray-300 dark:bg-forest-light/50" />
                       </div>
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
-                        <Skeleton className="h-6 w-6 rounded-full bg-forest-light/50" />
-                        <Skeleton className="h-4 w-24 bg-forest-light/50" />
+                        <Skeleton className="h-6 w-6 rounded-full bg-gray-300 dark:bg-forest-light/50" />
+                        <Skeleton className="h-4 w-24 bg-gray-300 dark:bg-forest-light/50" />
                       </div>
                     </TableCell>
-                    <TableCell><Skeleton className="h-4 w-16 bg-forest-light/50" /></TableCell>
-                    <TableCell><Skeleton className="h-4 w-20 bg-forest-light/50" /></TableCell>
-                    <TableCell className="text-right"><Skeleton className="h-4 w-16 ml-auto bg-forest-light/50" /></TableCell>
-                    <TableCell className="text-right"><Skeleton className="h-4 w-16 ml-auto bg-forest-light/50" /></TableCell>
+                    <TableCell><Skeleton className="h-4 w-16 bg-gray-300 dark:bg-forest-light/50" /></TableCell>
+                    <TableCell><Skeleton className="h-4 w-20 bg-gray-300 dark:bg-forest-light/50" /></TableCell>
+                    <TableCell className="text-right"><Skeleton className="h-4 w-16 ml-auto bg-gray-300 dark:bg-forest-light/50" /></TableCell>
+                    <TableCell className="text-right"><Skeleton className="h-4 w-16 ml-auto bg-gray-300 dark:bg-forest-light/50" /></TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -75,12 +75,12 @@ export const TeamOverview = ({ leagues, isLoading }: TeamOverviewProps) => {
 
   if (!leagues || leagues.length === 0) {
     return (
-      <Card className="bg-forest-light/30 border-mint/10">
+      <Card className="bg-gray-100 dark:bg-forest-light/30 dark:border-mint/10">
         <CardContent className="p-8">
           <div className="flex flex-col items-center justify-center text-center">
-            <Star className="h-12 w-12 text-mint/40 mb-4" />
-            <h3 className="text-xl font-semibold text-mint mb-2">Fetching Your Teams</h3>
-            <p className="text-white/60 max-w-md">
+            <Star className="h-12 w-12 text-sky-900 dark:text-mint/40 mb-4" />
+            <h3 className="text-xl font-semibold text-sky-900 dark:text-mint mb-2">Fetching Your Teams</h3>
+            <p className="text-sky-900 dark:text-white/60 max-w-md">
               We're connecting to Sleeper to retrieve your leagues and teams. This may take a moment...
             </p>
           </div>
@@ -90,18 +90,18 @@ export const TeamOverview = ({ leagues, isLoading }: TeamOverviewProps) => {
   }
 
   return (
-    <Card className="bg-forest-light/30 border-mint/10">
+    <Card className="text-sky-900 bg-gray-100 dark:bg-forest-light/30 dark:border-mint/10 shadow-sm">
       <CardContent className="p-4">
         <ScrollArea className="h-[400px] w-full">
           <Table>
             <TableHeader>
               <TableRow className="border-none">
-                <TableHead className="text-[#F1F1F1] font-bold">Team Name</TableHead>
-                <TableHead className="text-[#F1F1F1] font-bold">League</TableHead>
-                <TableHead className="text-[#F1F1F1] font-bold">Rank</TableHead>
-                <TableHead className="text-[#F1F1F1] font-bold">Record</TableHead>
-                <TableHead className="text-[#F1F1F1] font-bold text-right">Points For</TableHead>
-                <TableHead className="text-[#F1F1F1] font-bold text-right">Points Against</TableHead>
+                <TableHead className="dark:text-[#F1F1F1] font-bold">Team Name</TableHead>
+                <TableHead className="dark:text-[#F1F1F1] font-bold">League</TableHead>
+                <TableHead className="dark:text-[#F1F1F1] font-bold">Rank</TableHead>
+                <TableHead className="dark:text-[#F1F1F1] font-bold">Record</TableHead>
+                <TableHead className="dark:text-[#F1F1F1] font-bold text-right">Points For</TableHead>
+                <TableHead className="dark:text-[#F1F1F1] font-bold text-right">Points Against</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -109,11 +109,11 @@ export const TeamOverview = ({ leagues, isLoading }: TeamOverviewProps) => {
                 <TableRow 
                   key={league.id}
                   className={`
-                    border-none hover:bg-forest-light/50 transition-colors
+                    border-none hover:bg-gray-300 dark:hover:bg-forest-light/50 transition-colors
                     ${league.settings?.rank === 1 ? "bg-divine/5" : ""}
                   `}
                 >
-                  <TableCell className="text-[#F1F1F1]">
+                  <TableCell className="dark:text-[#F1F1F1]">
                     <div className="flex items-center gap-2">
                       <Avatar className="w-6 h-6">
                         <AvatarImage 
@@ -127,7 +127,7 @@ export const TeamOverview = ({ leagues, isLoading }: TeamOverviewProps) => {
                       <span>{league.settings?.team_name || 'Unnamed Team'}</span>
                     </div>
                   </TableCell>
-                  <TableCell className="text-[#F1F1F1]">
+                  <TableCell className="dark:text-[#F1F1F1]">
                     <div className="flex items-center gap-2">
                       <Avatar className="w-6 h-6">
                         <AvatarImage 
@@ -141,29 +141,29 @@ export const TeamOverview = ({ leagues, isLoading }: TeamOverviewProps) => {
                       <span>{league.name}</span>
                     </div>
                   </TableCell>
-                  <TableCell className="text-[#F1F1F1] flex items-center gap-1">
+                  <TableCell className="dark:text-[#F1F1F1] flex items-center gap-1">
                     {league.settings?.rank ? (
                       <>
-                        <span className={league.settings.rank === 1 ? "text-divine font-bold" : ""}>
+                        <span className={league.settings.rank === 1 ? "dark:text-divine font-bold" : ""}>
                           {`#${league.settings.rank}`}
                         </span>
                         {league.settings.rank === 1 && (
-                          <Star className="h-4 w-4 text-divine fill-divine" />
+                          <Star className="h-4 w-4 dark:text-divine fill-divine" />
                         )}
                       </>
                     ) : '-'}
                   </TableCell>
-                  <TableCell className="text-[#F1F1F1]">
+                  <TableCell className="dark:text-[#F1F1F1]">
                     {formatRecord(
                       league.settings?.wins,
                       league.settings?.losses,
                       league.settings?.ties
                     )}
                   </TableCell>
-                  <TableCell className="text-[#F1F1F1] text-right">
+                  <TableCell className="dark:text-[#F1F1F1] text-right">
                     {formatPoints(league.settings?.fpts, league.settings?.fpts_decimal)}
                   </TableCell>
-                  <TableCell className="text-[#F1F1F1] text-right">
+                  <TableCell className="dark:text-[#F1F1F1] text-right">
                     {formatPoints(league.settings?.fpts_against, league.settings?.fpts_against_decimal)}
                   </TableCell>
                 </TableRow>

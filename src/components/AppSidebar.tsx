@@ -135,8 +135,8 @@ export function AppSidebar() {
   return (
     <Sidebar className="bg-gray-50 dark:bg-forest border-r border-gray-200 dark:border-mint/10">
       <SidebarContent>
-        <div className={`px-6 py-5 mb-6 relative ${collapsed ? "px-2" : ""}`}>
-          <h1 className={`text-xl font-bold text-sky-900 dark:text-mint ${collapsed ? "hidden" : ""}`}>League Lynx</h1>
+        <div className={`px-6 mb-6 relative ${collapsed ? "px-2" : ""}`}>
+          {/* <h1 className={`text-xl font-bold text-sky-900 dark:text-mint ${collapsed ? "hidden" : ""}`}>League Lynx</h1> */}
           <SidebarTrigger />
         </div>
         

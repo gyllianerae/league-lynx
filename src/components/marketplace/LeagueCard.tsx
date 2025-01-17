@@ -83,7 +83,7 @@ export const LeagueCard = ({ league }: LeagueCardProps) => {
   };
 
   return (
-    <Card className="bg-forest-light/30 border-mint/10 backdrop-blur-sm overflow-hidden">
+    <Card className="bg-gray-50 dark:bg-forest-light/30 dark:border-mint/10 backdrop-blur-sm overflow-hidden">
       <div 
         className="h-48 w-full bg-cover bg-center relative"
         style={{ 
@@ -93,7 +93,7 @@ export const LeagueCard = ({ league }: LeagueCardProps) => {
       >
         {(imageError || !league.image) && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <Shield className="w-20 h-20 text-mint/20" />
+            <Shield className="w-20 h-20 dark:text-mint/20" />
           </div>
         )}
         {league.image && <img 
@@ -106,14 +106,14 @@ export const LeagueCard = ({ league }: LeagueCardProps) => {
       <div className="p-6 space-y-4">
         <div className="flex items-start justify-between">
           <div>
-            <h3 className="text-xl font-semibold text-white mb-1 text-left">{league.title}</h3>
+            <h3 className="text-xl font-semibold text-sky-900 dark:text-white mb-1 text-left">{league.title}</h3>
             {league.commissioner && (
               <UserAvatar user={league.commissioner} />
             )}
           </div>
           <div className="flex items-start gap-2">
-            <div className="bg-mint/10 px-3 py-1 rounded-full">
-              <span className="text-mint text-sm">{league.season} Season</span>
+            <div className="bg-sky-900/10 dark:bg-mint/10 px-3 py-1 rounded-full">
+              <span className="text-sky-900 dark:text-mint text-sm">{league.season} Season</span>
             </div>
             {isCommissioner && (
               <CommissionerActions 
@@ -125,15 +125,15 @@ export const LeagueCard = ({ league }: LeagueCardProps) => {
         </div>
 
         <div className="space-y-2">
-          <div className="flex items-center gap-2 text-white/60">
+          <div className="flex items-center gap-2 text-sky-900 dark:text-white/60">
             <Trophy className="h-4 w-4" />
             <span>${league.prize_pool} Prize Pool</span>
           </div>
-          <div className="flex items-center gap-2 text-white/60">
+          <div className="flex items-center gap-2 text-sky-900 dark:text-white/60">
             <Users className="h-4 w-4" />
             <span>{league.filled_spots}/{league.total_spots} Teams</span>
           </div>
-          <div className="flex items-center gap-2 text-white/60">
+          <div className="flex items-center gap-2 text-sky-900 dark:text-white/60">
             <CalendarDays className="h-4 w-4" />
             <span>Draft: {new Date(league.draft_date || '').toLocaleDateString()}</span>
           </div>
@@ -142,7 +142,7 @@ export const LeagueCard = ({ league }: LeagueCardProps) => {
         <div className="pt-4">
           {isAuthenticated ? (
             <Button 
-              className="w-full bg-mint hover:bg-mint/90 text-forest"
+              className="w-full bg-sky-900 dark:bg-mint dark:hover:bg-mint/90 text-gray-100 hover:bg-sky-900/80 dark:text-forest"
               onClick={handleViewDetails}
             >
               View Details
@@ -150,23 +150,23 @@ export const LeagueCard = ({ league }: LeagueCardProps) => {
           ) : (
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button className="w-full bg-mint hover:bg-mint/90 text-forest">
+                <Button className="w-full bg-sky-900 text-gray-100 dark:bg-mint dark:hover:bg-mint/90 dark:text-forest">
                   View Details
                 </Button>
               </AlertDialogTrigger>
-              <AlertDialogContent className="bg-forest-light border-mint/10">
+              <AlertDialogContent className="dark:bg-forest-light dark:border-mint/10">
                 <AlertDialogHeader>
-                  <AlertDialogTitle className="text-mint">Sign in Required</AlertDialogTitle>
-                  <AlertDialogDescription className="text-white/60">
+                  <AlertDialogTitle className="text-sky-900 dark:text-mint">Sign in Required</AlertDialogTitle>
+                  <AlertDialogDescription className="text-gray-500 dark:text-white/60">
                     You need to sign in or create an account to view league details.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel className="bg-forest-light text-mint hover:bg-forest-light/80">
+                  <AlertDialogCancel className="dark:bg-forest-light dark:text-mint dark:hover:bg-forest-light/80">
                     Cancel
                   </AlertDialogCancel>
                   <AlertDialogAction 
-                    className="bg-mint text-forest hover:bg-mint/90"
+                    className="bg-sky-900 text-gray-50 dark:bg-mint dark:text-forest dark:hover:bg-mint/90"
                     onClick={() => navigate('/auth')}
                   >
                     Sign In

@@ -109,13 +109,13 @@ export const PostLeagueDialog = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-mint hover:bg-mint/90 text-forest">
+        <Button className="bg-sky-900 text-gray-50 dark:bg-mint dark:hover:bg-mint/90 dark:text-forest">
           <Plus className="mr-2 h-4 w-4" /> Post League
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-forest-light border-mint/10">
+      <DialogContent className="bg-gray-100 dark:bg-forest-light dark:border-mint/10">
         <DialogHeader>
-          <DialogTitle className="text-mint">Post New League</DialogTitle>
+          <DialogTitle className="text-sky-900 dark:text-mint">Post New League</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -124,9 +124,9 @@ export const PostLeagueDialog = () => {
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-mint">League Title</FormLabel>
+                  <FormLabel className="text-sky-900 dark:text-mint">League Title</FormLabel>
                   <FormControl>
-                    <Input {...field} className="bg-forest border-mint/20 text-white" />
+                    <Input {...field} className="bg-gray-50 text-sky-900 dark:bg-forest dark:border-mint/20 dark:text-white" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -137,9 +137,9 @@ export const PostLeagueDialog = () => {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-mint">Description</FormLabel>
+                  <FormLabel className="text-sky-900 dark:text-mint">Description</FormLabel>
                   <FormControl>
-                    <Textarea {...field} className="bg-forest border-mint/20 text-white" />
+                    <Textarea {...field} className="bg-gray-50 text-sky-900 dark:bg-forest dark:border-mint/20 dark:text-white" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -151,9 +151,9 @@ export const PostLeagueDialog = () => {
                 name="totalSpots"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-mint">Total Spots</FormLabel>
+                    <FormLabel className="text-sky-900 dark:text-mint">Total Spots</FormLabel>
                     <FormControl>
-                      <Input {...field} type="number" className="bg-forest border-mint/20 text-white" />
+                      <Input {...field} type="number" className="bg-gray-50 text-sky-900 dark:bg-forest dark:border-mint/20 dark:text-white" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -164,9 +164,9 @@ export const PostLeagueDialog = () => {
                 name="entryFee"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-mint">Entry Fee ($)</FormLabel>
+                    <FormLabel className="text-sky-900 dark:text-mint">Entry Fee ($)</FormLabel>
                     <FormControl>
-                      <Input {...field} type="number" className="bg-forest border-mint/20 text-white" />
+                      <Input {...field} type="number" className="bg-gray-50 text-sky-900 dark:bg-forest dark:border-mint/20 dark:text-white" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -179,9 +179,9 @@ export const PostLeagueDialog = () => {
                 name="prizePool"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-mint">Prize Pool ($)</FormLabel>
+                    <FormLabel className="text-sky-900 dark:text-mint">Prize Pool ($)</FormLabel>
                     <FormControl>
-                      <Input {...field} type="number" className="bg-forest border-mint/20 text-white" />
+                      <Input {...field} type="number" className="bg-gray-50 text-sky-900 dark:bg-forest dark:border-mint/20 dark:text-white" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -192,9 +192,9 @@ export const PostLeagueDialog = () => {
                 name="draftDate"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-mint">Draft Date</FormLabel>
+                    <FormLabel className="text-sky-900 dark:text-mint">Draft Date</FormLabel>
                     <FormControl>
-                      <Input {...field} type="datetime-local" className="bg-forest border-mint/20 text-white" />
+                      <Input {...field} type="datetime-local" className="bg-gray-50 text-sky-900 dark:bg-forest dark:border-mint/20 dark:text-white" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -206,15 +206,15 @@ export const PostLeagueDialog = () => {
               name="season"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-mint">Season</FormLabel>
+                  <FormLabel className="text-sky-900 dark:text-mint">Season</FormLabel>
                   <FormControl>
-                    <Input {...field} type="number" className="bg-forest border-mint/20 text-white" />
+                    <Input {...field} type="number" className="bg-gray-50 text-sky-900 dark:bg-forest dark:border-mint/20 dark:text-white" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full bg-mint hover:bg-mint/90 text-forest">
+            <Button type="submit" className="w-full bg-sky-900 text-gray-50 dark:bg-mint dark:hover:bg-mint/90 dark:text-forest">
               Create League
             </Button>
           </form>

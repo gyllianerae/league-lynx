@@ -19,16 +19,18 @@ export function TopNav() {
   const [showSettings, setShowSettings] = useState(false);
 
   return (
-    <div className="fixed top-0 right-0 left-0 h-16 z-50 glass-nav">
-      <div className="container h-full mx-auto flex items-center justify-between px-4">
-        <div /> {/* Empty div to maintain flex spacing */}
+    <div className="fixed top-0 right-0 left-0 h-16 z-50 glass-nav bg-gray-50">
+      <div className="h-full mx-auto flex items-center justify-between px-10 bg-gray-50 shadow-md dark:bg-forest">
+        <div>
+          <h1 className="text-xl font-bold text-sky-900 dark:text-mint">League Lynx</h1>
+        </div> {/* Empty div to maintain flex spacing */}
         
         <div className="flex items-center gap-4">
           <Button
             variant="ghost"
             size="icon"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            className="text-foreground hover:text-sky-600 dark:text-white dark:hover:text-mint hover:bg-sky-100/50 dark:hover:bg-forest-light/50"
+            className="text-foreground hover:text-sky-800 text-sky-900 dark:text-white dark:hover:text-mint hover:bg-sky-100/50 dark:hover:bg-forest-light/50"
           >
             {theme === "light" ? (
               <Moon className="h-5 w-5" />
@@ -44,7 +46,7 @@ export function TopNav() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="text-foreground hover:text-sky-600 dark:text-white dark:hover:text-mint hover:bg-sky-100/50 dark:hover:bg-forest-light/50"
+                    className="text-foreground hover:text-sky-600 text-sky-900 dark:text-white dark:hover:text-mint hover:bg-sky-100/50 dark:hover:bg-forest-light/50"
                   >
                     {user?.user_metadata?.avatar_url ? (
                       <img 
@@ -59,7 +61,7 @@ export function TopNav() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-white/90 dark:bg-forest-light/90 backdrop-blur-xl border-sky-600/10 dark:border-mint/10">
                   <DropdownMenuItem
-                    className="text-sky-600 hover:bg-sky-100/50 dark:text-mint dark:hover:bg-forest-light/50 cursor-pointer"
+                    className="text-sky-900 hover:bg-gray-100 dark:text-mint dark:hover:bg-forest-light/50 cursor-pointer"
                     onClick={() => setShowSettings(true)}
                   >
                     <Settings className="mr-2 h-4 w-4" />
@@ -71,7 +73,7 @@ export function TopNav() {
           ) : (
             <Button
               variant="ghost"
-              className="text-foreground hover:text-sky-600 dark:text-white dark:hover:text-mint hover:bg-sky-100/50 dark:hover:bg-forest-light/50"
+              className="text-foreground hover:text-sky-600 text-sky-900 dark:text-white dark:hover:text-mint hover:bg-sky-100/50 dark:hover:bg-forest-light/50"
               onClick={() => navigate('/auth')}
             >
               <LogIn className="mr-2 h-4 w-4" />

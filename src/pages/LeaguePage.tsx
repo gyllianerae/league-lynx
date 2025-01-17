@@ -63,7 +63,7 @@ export default function LeaguePage() {
   if (isLoading || isLoadingState) {
     return (
       <div className="flex items-center justify-center h-full">
-        <div className="text-mint">Loading league...</div>
+        <div className="text-sky-900 dark:text-mint">Loading league...</div>
       </div>
     );
   }
@@ -71,7 +71,7 @@ export default function LeaguePage() {
   if (!league) {
     return (
       <div className="flex items-center justify-center h-full">
-        <div className="text-mint">League not found</div>
+        <div className="text-sky-900 dark:text-mint">League not found</div>
       </div>
     );
   }
@@ -88,96 +88,96 @@ export default function LeaguePage() {
   return (
     <div className="space-y-8">
       {/* League Header */}
-      <div className="bg-forest-light/30 border border-mint/10 backdrop-blur-sm rounded-lg p-6">
+      <div className="bg-gray-50 dark:bg-forest-light/30 border dark:border-mint/10 backdrop-blur-sm rounded-lg p-6">
         <div className="flex items-center gap-4 mb-2">
-          <Trophy className="h-8 w-8 text-blue-400" />
-          <h1 className="text-3xl font-bold text-mint">{league.name}</h1>
+          <Trophy className="h-8 w-8 text-sky-900 dark:text-blue-400" />
+          <h1 className="text-3xl font-bold text-sky-900 dark:text-mint">{league.name}</h1>
         </div>
-        <div className="text-white/60 text-start">
+        <div className="text-sky-900 dark:text-white/60 text-start">
           Season {league.season} • {league.total_rosters} Teams
         </div>
       </div>
 
       {/* League Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card className="bg-forest-light/30 border-mint/10 backdrop-blur-sm p-6">
+        <Card className="bg-gray-50 dark:bg-forest-light/30 dark:border-mint/10 backdrop-blur-sm p-6">
           <div className="flex items-center gap-3 mb-2">
-            <Users className="h-5 w-5 text-mint" />
-            <h3 className="text-lg font-semibold text-mint">Teams</h3>
+            <Users className="h-5 w-5 text-sky-900 dark:text-mint" />
+            <h3 className="text-lg font-semibold text-sky-900 dark:text-mint">Teams</h3>
           </div>
-          <div className="text-3xl font-bold text-white text-start">{league.total_rosters}</div>
+          <div className="text-3xl font-bold text-sky-900 dark:text-white text-start">{league.total_rosters}</div>
         </Card>
 
-        <Card className="bg-forest-light/30 border-mint/10 backdrop-blur-sm p-6">
+        <Card className="bg-gray-50 dark:bg-forest-light/30 dark:border-mint/10 backdrop-blur-sm p-6">
           <div className="flex items-center gap-3 mb-2">
-            <Trophy className="h-5 w-5 text-mint" />
-            <h3 className="text-lg font-semibold text-mint">Playoff Teams</h3>
+            <Trophy className="h-5 w-5 text-sky-900 dark:text-mint" />
+            <h3 className="text-lg font-semibold text-sky-900 dark:text-mint">Playoff Teams</h3>
           </div>
-          <div className="text-3xl font-bold text-white text-start">6</div>
+          <div className="text-3xl font-bold text-sky-900 dark:text-white text-start">6</div>
         </Card>
 
-        <Card className="bg-forest-light/30 border-mint/10 backdrop-blur-sm p-6">
+        <Card className="bg-gray-50 dark:bg-forest-light/30 border-mint/10 backdrop-blur-sm p-6">
           <div className="flex items-center gap-3 mb-2">
-            <CalendarDays className="h-5 w-5 text-mint" />
-            <h3 className="text-lg font-semibold text-mint">Current Week</h3>
+            <CalendarDays className="h-5 w-5 text-sky-900 dark:text-mint" />
+            <h3 className="text-lg font-semibold text-sky-900 dark:text-mint">Current Week</h3>
           </div>
-          <div className="text-3xl font-bold text-white text-start">{weekDisplay}</div>
+          <div className="text-3xl font-bold text-sky-900 dark:text-white text-start">{weekDisplay}</div>
         </Card>
       </div>
 
       {/* Current Matchups */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold text-mint">Current Matchups</h2>
+        <h2 className="text-2xl font-bold text-sky-900 dark:text-mint">Current Matchups</h2>
         <div className="grid grid-cols-1 gap-4">
           {/* Placeholder for matchups */}
-          <div className="text-white/60">No current matchups</div>
+          <div className="text-sky-900 dark:text-white/60">No current matchups</div>
         </div>
       </div>
 
       {/* League Standings */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold text-mint">League Standings</h2>
+        <h2 className="text-2xl font-bold text-sky-900 dark:text-mint">League Standings</h2>
         
         <div className="flex items-center justify-between gap-4 mb-4">
           <div className="flex-1 relative">
             <Input 
               placeholder="Search teams or owners..." 
-              className="bg-forest-light/30 border-mint/10 text-white pl-10"
+              className="bg-gray-50 dark:bg-forest-light/30 dark:border-mint/10 text-sky-900 dark:text-white pl-10"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <Search className="h-4 w-4 text-mint/50 absolute left-3 top-1/2 transform -translate-y-1/2" />
+            <Search className="h-4 w-4 text-sky-900 dark:text-mint/50 absolute left-3 top-1/2 transform -translate-y-1/2" />
           </div>
           <Button
             variant="outline"
-            className="border-mint/10 text-mint hover:bg-mint/10"
+            className="text-sky-900 bg-gray-50 dark:border-mint/10 dark:text-mint dark:hover:bg-mint/10"
           >
             <SlidersHorizontal className="h-4 w-4 mr-2" />
             Filters
           </Button>
         </div>
 
-        <div className="bg-forest-light/30 border border-mint/10 backdrop-blur-sm rounded-lg overflow-hidden">
+        <div className="bg-gray-50 dark:bg-forest-light/30 border dark:border-mint/10 backdrop-blur-sm rounded-lg overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-mint/10">
-                <th className="text-left p-4 text-mint/60">Team</th>
-                <th className="text-left p-4 text-mint/60">Owner</th>
-                <th className="text-left p-4 text-mint/60">Record</th>
-                <th className="text-right p-4 text-mint/60">Points For</th>
-                <th className="text-right p-4 text-mint/60">Points Against</th>
+              <tr className="border-b dark:border-mint/10">
+                <th className="text-left p-4 text-sky-900 dark:text-mint/60">Team</th>
+                <th className="text-left p-4 text-sky-900 dark:text-mint/60">Owner</th>
+                <th className="text-left p-4 text-sky-900 dark:text-mint/60">Record</th>
+                <th className="text-right p-4 text-sky-900 dark:text-mint/60">Points For</th>
+                <th className="text-right p-4 text-sky-900 dark:text-mint/60">Points Against</th>
               </tr>
             </thead>
             <tbody>
               {filteredTeams?.map((team) => (
                 <tr key={team.roster_id} className="border-b border-mint/10">
-                  <td className="p-4 text-white text-left">{team.team_name}</td>
-                  <td className="p-4 text-white/60 text-left">{team.owner_name}</td>
-                  <td className="p-4 text-white text-left">{`${team.wins}-${team.losses}${team.ties ? `-${team.ties}` : ''}`}</td>
-                  <td className="p-4 text-white text-right">
+                  <td className="p-4 text-sky-900 dark:text-white text-left">{team.team_name}</td>
+                  <td className="p-4 text-sky-900 dark:text-white/60 text-left">{team.owner_name}</td>
+                  <td className="p-4 text-sky-900 dark:text-white text-left">{`${team.wins}-${team.losses}${team.ties ? `-${team.ties}` : ''}`}</td>
+                  <td className="p-4 text-sky-900 dark:text-white text-right">
                     {team.fpts.toFixed(2)}
                   </td>
-                  <td className="p-4 text-white text-right">
+                  <td className="p-4 text-sky-900 dark:text-white text-right">
                     {team.fpts_against.toFixed(2)}
                   </td>
                 </tr>

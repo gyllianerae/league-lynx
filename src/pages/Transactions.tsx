@@ -57,7 +57,7 @@ const Transactions = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="text-mint">Loading transactions...</div>
+        <div className="text-gray-500 dark:text-mint">Loading transactions...</div>
       </div>
     );
   }
@@ -65,7 +65,7 @@ const Transactions = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3">
-        <h1 className="text-2xl font-bold text-foreground">Recent Transactions</h1>
+        <h1 className="text-2xl font-bold text-sky-900 dark:text-mint">Recent Transactions</h1>
       </div>
 
       <div className="space-y-4">

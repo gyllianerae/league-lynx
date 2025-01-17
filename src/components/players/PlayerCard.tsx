@@ -49,7 +49,7 @@ export const PlayerCard = ({ player, onClick, viewMode = "leagues" }: PlayerCard
   
   return (
     <Card
-      className="bg-forest-light/30 border-mint/10 hover:bg-forest-light/40 transition-colors cursor-pointer overflow-hidden"
+      className="bg-gray-50 hover:bg-gray-200 dark:bg-forest-light/30 dark:border-mint/10 dark:hover:bg-forest-light/40 transition-colors cursor-pointer overflow-hidden"
       onClick={onClick}
     >
       <div className="flex items-start p-4 gap-4">
@@ -73,17 +73,17 @@ export const PlayerCard = ({ player, onClick, viewMode = "leagues" }: PlayerCard
         
         <div className="flex-1 min-w-0 space-y-2">
           <div>
-            <h3 className="text-mint font-semibold text-left flex items-center gap-2">
+            <h3 className="text-sky-900 dark:text-mint font-semibold text-left flex items-center gap-2">
               {playerName}
               <span className={`text-sm font-medium ${getPositionColor(player.position || '')}`}>
                 {player.position}
               </span>
             </h3>
-            <div className="flex items-center gap-2 text-sm text-white/60">
+            <div className="flex items-center gap-2 text-sm text-sky-800 dark:text-white/60">
               <span>{player.team || 'Free Agent'}</span>
               {player.number && (
                 <>
-                  <span className="text-white/20">•</span>
+                  <span className="dark:text-white/20">•</span>
                   <div className="flex items-center gap-1">
                     <Hash className="h-3 w-3" />
                     {player.number}
@@ -105,7 +105,7 @@ export const PlayerCard = ({ player, onClick, viewMode = "leagues" }: PlayerCard
               </Badge>
             )}
             {player.age && (
-              <div className="flex items-center gap-1 text-xs text-white/60">
+              <div className="flex items-center gap-1 text-xs text-sky-800 dark:text-white/60">
                 <Clock className="h-3 w-3" />
                 {player.age} years old
               </div>

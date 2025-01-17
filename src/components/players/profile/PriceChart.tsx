@@ -37,7 +37,7 @@ export const PriceChart = () => {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-semibold text-white mb-4 text-start">Price chart</h2>
+      <h2 className="text-xl font-semibold text-sky-900 dark:text-white mb-4 text-start">Price chart</h2>
       <div className="h-[200px]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={priceData}>
@@ -45,12 +45,12 @@ export const PriceChart = () => {
             <XAxis 
               dataKey="year" 
               stroke="#ffffff60"
-              tick={{ fill: '#ffffff90' }}
+              tick={{ fill: '#ffb703' }}
               tickLine={{ stroke: '#ffffff30' }}
             />
             <YAxis 
               stroke="#ffffff60"
-              tick={{ fill: '#ffffff90' }}
+              tick={{ fill: '#ffb703' }}
               tickLine={{ stroke: '#ffffff30' }}
             />
             <Tooltip 

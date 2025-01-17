@@ -33,19 +33,19 @@ export const CommissionerActions = ({ league, onDelete }: CommissionerActionsPro
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon" className="text-white/60 hover:text-white">
+          <Button variant="ghost" size="icon" className="text-sky-900 dark:text-white/60 dark:hover:text-white">
             <MoreVertical className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="bg-forest-light border-mint/10">
+        <DropdownMenuContent align="end" className=" dark:bg-forest-light dark:border-mint/10">
           <DropdownMenuItem 
-            className="text-mint cursor-pointer"
+            className="hover:bg-gray-200 dark:hover:bg-forest-light text-sky-900 dark:text-mint cursor-pointer"
             onClick={() => setIsEditOpen(true)}
           >
             Edit League
           </DropdownMenuItem>
           <DropdownMenuItem 
-            className="text-red-400 cursor-pointer"
+            className="hover:bg-gray-200 dark:hover:bg-forest-light text-red-400 cursor-pointer"
             onClick={() => setIsDeleteDialogOpen(true)}
           >
             Delete League

@@ -34,7 +34,7 @@ export default function MyLeagues() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[50vh]">
-        <div className="text-mint">Loading...</div>
+        <div className="text-sky-900 dark:text-mint">Loading...</div>
       </div>
     );
   }
@@ -42,7 +42,7 @@ export default function MyLeagues() {
   if (!leagues?.length) {
     return (
       <div className="text-center py-12">
-        <h2 className="text-2xl font-bold text-mint mb-4">
+        <h2 className="text-2xl font-bold text-sky-900 dark:text-mint mb-4">
           {userRole === "commissioner" ? "No Leagues Found" : "No Teams Found"}
         </h2>
         <p className="text-white/70">
@@ -57,16 +57,16 @@ export default function MyLeagues() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        {/* <h2 className="text-2xl font-bold text-foreground">
+        <h2 className="text-2xl font-bold text-sky-900 dark:text-mint">
           {userRole === "commissioner" ? "My Leagues" : "My Teams"}
-        </h2> */}
+        </h2>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {leagues.map((league) => (
           <Card 
             key={league.id} 
-            className="bg-forest-light/50 backdrop-blur-xl border-mint/10 cursor-pointer transition-all duration-200 hover:bg-forest-light/70 overflow-hidden"
+            className="bg-gray-50 dark:bg-forest-light/50 backdrop-blur-xl dark:border-mint/10 cursor-pointer transition-all duration-200 dark:hover:bg-forest-light/70 overflow-hidden"
             onClick={() => navigate(`/leagues/${league.league_id}`)}
           >
             <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
@@ -76,17 +76,17 @@ export default function MyLeagues() {
                     src={getAvatarUrl(league.avatar_id)} 
                     alt={league.name}
                   />
-                  <AvatarFallback className="bg-forest text-mint">
+                  <AvatarFallback className="dark:bg-forest dark:text-mint bg-gray-500">
                     {league.name.charAt(0)}
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <CardTitle className="text-lg font-semibold text-mint">
+                  <CardTitle className="text-lg font-semibold text-sky-900 dark:text-mint">
                     {userRole === "commissioner" 
                       ? league.name 
                       : league.settings?.team_name || 'Unnamed Team'}
                   </CardTitle>
-                  <p className="text-sm text-white/60">
+                  <p className="text-sm text-sky-900 dark:text-white/60 text-start">
                     {userRole === "commissioner" 
                       ? `Season ${league.season}` 
                       : league.name}
@@ -94,31 +94,31 @@ export default function MyLeagues() {
                 </div>
               </div>
               {league.settings?.rank === 1 && (
-                <Star className="h-5 w-5 text-divine fill-divine" />
+                <Star className="h-5 w-5 text-yellow-600 fill-yellow-600 dark:text-divine dark:fill-divine" />
               )}
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-2 text-white/70">
+                  <div className="flex items-center gap-2 text-sky-900 dark:text-white/70">
                     <Users className="h-4 w-4" />
                     <span>{league.total_rosters} Teams</span>
                   </div>
                   {userRole !== "commissioner" && (
-                    <div className="text-white/70">
+                    <div className="text-sky-900 dark:text-white/70">
                       Record: {league.settings?.wins || 0}-{league.settings?.losses || 0}
                       {league.settings?.ties > 0 ? `-${league.settings.ties}` : ''}
                     </div>
                   )}
                 </div>
                 {league.settings?.fpts !== undefined && (
-                  <div className="flex items-center justify-between text-sm text-white/70">
+                  <div className="flex items-center justify-between text-sm text-sky-900 dark:text-white/70">
                     <span>Points For:</span>
                     <span>{league.settings.fpts + (league.settings.fpts_decimal || 0) / 100}</span>
                   </div>
                 )}
                 {league.draft_id && (
-                  <div className="flex items-center gap-2 text-sm text-white/70">
+                  <div className="flex items-center gap-2 text-sm text-sky-900 dark:text-white/70">
                     <Calendar className="h-4 w-4" />
                     <span>Draft {league.status === 'pre_draft' ? 'Pending' : 'Completed'}</span>
                   </div>

@@ -130,28 +130,28 @@ const AuthPage = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-forest flex items-center justify-center">
+      <div className="min-h-screen dark:bg-forest flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-mint"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-forest flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen dark:bg-forest flex items-center justify-center px-4 py-12">
       <div className="max-w-md w-full space-y-8">
-        <div className="bg-forest-light/30 backdrop-blur-xl p-8 rounded-lg shadow-xl border border-mint/10">
+        <div className="dark:bg-forest-light/30 backdrop-blur-xl p-8 rounded-lg shadow-xl border dark:border-mint/10">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-mint/10 mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-mint/10 mb-4">
               {isSignUp ? (
-                <UserPlus className="h-8 w-8 text-mint" />
+                <UserPlus className="h-8 w-8 text-sky-900 dark:text-mint" />
               ) : (
-                <LogIn className="h-8 w-8 text-mint" />
+                <LogIn className="h-8 w-8 text-sky-900 dark:text-mint" />
               )}
             </div>
-            <h2 className="text-3xl font-bold text-mint">
+            <h2 className="text-3xl font-bold text-sky-900 dark:text-mint">
               {isSignUp ? "Create Account" : "Welcome Back"}
             </h2>
-            <p className="mt-2 text-mint/60">
+            <p className="mt-2 text-sky-900 dark:text-mint/60">
               {isSignUp
                 ? "Sign up to start managing your fantasy leagues"
                 : "Sign in to access your dashboard"}
@@ -164,7 +164,7 @@ const AuthPage = () => {
             <button
               type="button"
               onClick={() => setIsSignUp(!isSignUp)}
-              className="text-mint/80 hover:text-mint hover:underline transition-colors"
+              className="text-sky-900 dark:text-mint/80 dark:hover:text-mint hover:text-gray-500 transition-colors"
             >
               {isSignUp
                 ? "Already have an account? Sign in"

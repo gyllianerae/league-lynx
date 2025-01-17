@@ -115,23 +115,23 @@ export const EditLeagueDialog = ({ league, open, onOpenChange }: EditLeagueDialo
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-forest-light border-mint/10">
+      <DialogContent className="dark:bg-forest-light dark:border-mint/10">
         <DialogHeader>
-          <DialogTitle className="text-mint">Edit League Opening</DialogTitle>
+          <DialogTitle className="dark:text-mint">Edit League Opening</DialogTitle>
         </DialogHeader>
         <ScrollArea className="h-[80vh] pr-4">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <div className="space-y-4">
-                <h3 className="text-sm font-medium text-mint/80">Team Information</h3>
+                <h3 className="text-sm font-medium dark:text-mint/80">Team Information</h3>
                 <FormField
                   control={form.control}
                   name="teamName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-mint">Team Name</FormLabel>
+                      <FormLabel className="dark:text-mint">Team Name</FormLabel>
                       <FormControl>
-                        <Input {...field} className="bg-forest border-mint/20 text-white" />
+                        <Input {...field} className="dark:bg-forest dark:border-mint/20 dark:text-white" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -142,14 +142,14 @@ export const EditLeagueDialog = ({ league, open, onOpenChange }: EditLeagueDialo
                   name="teamStatus"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-mint">Team Status</FormLabel>
+                      <FormLabel className="dark:text-mint">Team Status</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger className="bg-forest border-mint/20 text-white">
+                          <SelectTrigger className="dark:bg-forest dark:border-mint/20 dark:text-white">
                             <SelectValue placeholder="Select status" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="bg-forest-light border-mint/10">
+                        <SelectContent className="dark:bg-forest-light dark:border-mint/10">
                           <SelectItem value="open">Open</SelectItem>
                           <SelectItem value="orphaned">Orphaned</SelectItem>
                           <SelectItem value="active">Active</SelectItem>
@@ -165,9 +165,9 @@ export const EditLeagueDialog = ({ league, open, onOpenChange }: EditLeagueDialo
                     name="wins"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-mint">Wins</FormLabel>
+                        <FormLabel className="dark:text-mint">Wins</FormLabel>
                         <FormControl>
-                          <Input {...field} type="number" className="bg-forest border-mint/20 text-white" />
+                          <Input {...field} type="number" className="dark:bg-forest dark:border-mint/20 dark:text-white" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -178,9 +178,9 @@ export const EditLeagueDialog = ({ league, open, onOpenChange }: EditLeagueDialo
                     name="losses"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-mint">Losses</FormLabel>
+                        <FormLabel className="dark:text-mint">Losses</FormLabel>
                         <FormControl>
-                          <Input {...field} type="number" className="bg-forest border-mint/20 text-white" />
+                          <Input {...field} type="number" className="dark:bg-forest dark:border-mint/20 dark:text-white" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -191,9 +191,9 @@ export const EditLeagueDialog = ({ league, open, onOpenChange }: EditLeagueDialo
                     name="ties"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-mint">Ties</FormLabel>
+                        <FormLabel className="dark:text-mint">Ties</FormLabel>
                         <FormControl>
-                          <Input {...field} type="number" className="bg-forest border-mint/20 text-white" />
+                          <Input {...field} type="number" className="dark:bg-forest dark:border-mint/20 dark:text-white" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -205,9 +205,9 @@ export const EditLeagueDialog = ({ league, open, onOpenChange }: EditLeagueDialo
                   name="rank"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-mint">Current Rank</FormLabel>
+                      <FormLabel className="dark:text-mint">Current Rank</FormLabel>
                       <FormControl>
-                        <Input {...field} type="number" className="bg-forest border-mint/20 text-white" />
+                        <Input {...field} type="number" className="dark:bg-forest dark:border-mint/20 dark:text-white" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -216,15 +216,15 @@ export const EditLeagueDialog = ({ league, open, onOpenChange }: EditLeagueDialo
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-sm font-medium text-mint/80">League Details</h3>
+                <h3 className="text-sm font-medium dark:text-mint/80">League Details</h3>
                 <FormField
                   control={form.control}
                   name="leagueName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-mint">League Name</FormLabel>
+                      <FormLabel className="dark:text-mint">League Name</FormLabel>
                       <FormControl>
-                        <Input {...field} className="bg-forest border-mint/20 text-white" />
+                        <Input {...field} className="dark:bg-forest dark:border-mint/20 dark:text-white" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -237,7 +237,7 @@ export const EditLeagueDialog = ({ league, open, onOpenChange }: EditLeagueDialo
                     <FormItem>
                       <FormLabel className="text-mint">League ID</FormLabel>
                       <FormControl>
-                        <Input {...field} className="bg-forest border-mint/20 text-white" />
+                        <Input {...field} className="dark:bg-forest dark:border-mint/20 dark:text-white" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -249,9 +249,9 @@ export const EditLeagueDialog = ({ league, open, onOpenChange }: EditLeagueDialo
                     name="leagueFee"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-mint">League Fee ($)</FormLabel>
+                        <FormLabel className="dark:text-mint">League Fee ($)</FormLabel>
                         <FormControl>
-                          <Input {...field} type="number" className="bg-forest border-mint/20 text-white" />
+                          <Input {...field} type="number" className="dark:bg-forest dark:border-mint/20 dark:text-white" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -262,14 +262,14 @@ export const EditLeagueDialog = ({ league, open, onOpenChange }: EditLeagueDialo
                     name="leagueType"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-mint">League Type</FormLabel>
+                        <FormLabel className="dark:text-mint">League Type</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
-                            <SelectTrigger className="bg-forest border-mint/20 text-white">
+                            <SelectTrigger className="dark:bg-forest dark:border-mint/20 dark:text-white">
                               <SelectValue placeholder="Select type" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent className="bg-forest-light border-mint/10">
+                          <SelectContent className="dark:bg-forest-light dark:border-mint/10">
                             <SelectItem value="Dynasty">Dynasty</SelectItem>
                             <SelectItem value="Keeper">Keeper</SelectItem>
                             <SelectItem value="C2C">C2C</SelectItem>
@@ -286,9 +286,9 @@ export const EditLeagueDialog = ({ league, open, onOpenChange }: EditLeagueDialo
                   name="platform"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-mint">Platform</FormLabel>
+                      <FormLabel className="dark:text-mint">Platform</FormLabel>
                       <FormControl>
-                        <Input {...field} className="bg-forest border-mint/20 text-white" placeholder="e.g., Sleeper, ESPN" />
+                        <Input {...field} className="dark:bg-forest dark:border-mint/20 dark:text-white" placeholder="e.g., Sleeper, ESPN" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -297,15 +297,15 @@ export const EditLeagueDialog = ({ league, open, onOpenChange }: EditLeagueDialo
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-sm font-medium text-mint/80">Team Details</h3>
+                <h3 className="text-sm font-medium dark:text-mint/80">Team Details</h3>
                 <FormField
                   control={form.control}
                   name="keyPlayers"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-mint">Key Players</FormLabel>
+                      <FormLabel className="dark:text-mint">Key Players</FormLabel>
                       <FormControl>
-                        <Input {...field} className="bg-forest border-mint/20 text-white" placeholder="e.g., Justin Jefferson, Trevor Lawrence" />
+                        <Input {...field} className="dark:bg-forest dark:border-mint/20 dark:text-white" placeholder="e.g., Justin Jefferson, Trevor Lawrence" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -316,9 +316,9 @@ export const EditLeagueDialog = ({ league, open, onOpenChange }: EditLeagueDialo
                   name="starters"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-mint">Current Starters</FormLabel>
+                      <FormLabel className="dark:text-mint">Current Starters</FormLabel>
                       <FormControl>
-                        <Textarea {...field} className="bg-forest border-mint/20 text-white" placeholder="List your current starting lineup" />
+                        <Textarea {...field} className="dark:bg-forest dark:border-mint/20 dark:text-white" placeholder="List your current starting lineup" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -329,9 +329,9 @@ export const EditLeagueDialog = ({ league, open, onOpenChange }: EditLeagueDialo
                   name="upcomingMatchup"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-mint">Upcoming Matchup</FormLabel>
+                      <FormLabel className="dark:text-mint">Upcoming Matchup</FormLabel>
                       <FormControl>
-                        <Input {...field} className="bg-forest border-mint/20 text-white" placeholder="e.g., vs Team XYZ Week 5" />
+                        <Input {...field} className="dark:bg-forest dark:border-mint/20 dark:text-white" placeholder="e.g., vs Team XYZ Week 5" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -344,16 +344,16 @@ export const EditLeagueDialog = ({ league, open, onOpenChange }: EditLeagueDialo
                 name="comments"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-mint">Additional Comments</FormLabel>
+                    <FormLabel className="dark:text-mint">Additional Comments</FormLabel>
                     <FormControl>
-                      <Textarea {...field} className="bg-forest border-mint/20 text-white" />
+                      <Textarea {...field} className="dark:bg-forest dark:border-mint/20 dark:text-white" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
-              <Button type="submit" className="w-full bg-mint hover:bg-mint/90 text-forest">
+              <Button type="submit" className="w-full dark:bg-mint dark:hover:bg-mint/90 dark:text-forest">
                 Update League Opening
               </Button>
             </form>

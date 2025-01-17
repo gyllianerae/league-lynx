@@ -93,7 +93,7 @@ export default function MarketplaceLeaguePage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-full">
-        <div className="text-mint">Loading league details...</div>
+        <div className="text-gray-500 dark:text-mint">Loading league details...</div>
       </div>
     );
   }
@@ -101,7 +101,7 @@ export default function MarketplaceLeaguePage() {
   if (!league) {
     return (
       <div className="flex items-center justify-center h-full">
-        <div className="text-mint">League not found</div>
+        <div className="text-gray-500 dark:text-mint">League not found</div>
       </div>
     );
   }
@@ -123,7 +123,7 @@ export default function MarketplaceLeaguePage() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-t from-forest via-forest/80 to-transparent backdrop-blur-sm">
+        <div className="absolute inset-0 bg-gradient-to-t from-sky-900/80 via-sky-900/50 dark:from-forest dark:via-forest/80 to-transparent backdrop-blur-sm">
           <div className="absolute bottom-0 left-0 p-8 w-full">
             <div className="flex items-start justify-between">
               <div className="backdrop-blur-xl bg-forest/30 p-6 rounded-xl border border-mint/10">
@@ -140,48 +140,48 @@ export default function MarketplaceLeaguePage() {
 
       {/* League Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card className="bg-forest-light/30 border-mint/10 backdrop-blur-sm p-6">
+        <Card className="bg-gray-100 dark:bg-forest-light/30 dark:border-mint/10 backdrop-blur-sm p-6">
           <div className="flex items-center gap-3 mb-2">
-            <Trophy className="h-5 w-5 text-mint" />
-            <h3 className="text-lg font-semibold text-mint">Prize Pool</h3>
+            <Trophy className="h-5 w-5 text-sky-900 dark:text-mint" />
+            <h3 className="text-lg font-semibold text-sky-900 dark:text-mint">Prize Pool</h3>
           </div>
-          <div className="text-3xl font-bold text-white text-start">
+          <div className="text-3xl font-bold text-sky-900 dark:text-white text-start">
             ${league.prize_pool || 0}
           </div>
         </Card>
 
-        <Card className="bg-forest-light/30 border-mint/10 backdrop-blur-sm p-6">
+        <Card className="bg-gray-100 dark:bg-forest-light/30 dark:border-mint/10 backdrop-blur-sm p-6">
           <div className="flex items-center gap-3 mb-2">
-            <Users className="h-5 w-5 text-mint" />
-            <h3 className="text-lg font-semibold text-mint">Available Spots</h3>
+            <Users className="h-5 w-5 text-sky-900 dark:text-mint" />
+            <h3 className="text-lg font-semibold text-sky-900 dark:text-mint">Available Spots</h3>
           </div>
-          <div className="text-3xl font-bold text-white text-start">
+          <div className="text-3xl font-bold text-sky-900 dark:text-white text-start">
             {league.total_spots - league.filled_spots} of {league.total_spots}
           </div>
         </Card>
 
-        <Card className="bg-forest-light/30 border-mint/10 backdrop-blur-sm p-6">
+        <Card className="bg-gray-100 dark:bg-forest-light/30 dark:border-mint/10 backdrop-blur-sm p-6">
           <div className="flex items-center gap-3 mb-2">
-            <CalendarDays className="h-5 w-5 text-mint" />
-            <h3 className="text-lg font-semibold text-mint">Draft Date</h3>
+            <CalendarDays className="h-5 w-5 text-sky-900 dark:text-mint" />
+            <h3 className="text-lg font-semibold text-sky-900 dark:text-mint">Draft Date</h3>
           </div>
-          <div className="text-3xl font-bold text-white text-start">
+          <div className="text-3xl font-bold text-sky-900 dark:text-white text-start">
             {league.draft_date ? new Date(league.draft_date).toLocaleDateString() : 'TBD'}
           </div>
         </Card>
       </div>
 
       {/* League Description */}
-      <Card className="bg-forest-light/30 border-mint/10 backdrop-blur-sm p-6">
-        <h2 className="text-2xl font-bold text-mint mb-4 text-start">About this League</h2>
-        <p className="text-white/80 leading-relaxed text-start">{league.description || 'No description available.'}</p>
+      <Card className="bg-gray-100 dark:bg-forest-light/30 dark:border-mint/10 backdrop-blur-sm p-6">
+        <h2 className="text-2xl font-bold text-sky-900 dark:text-mint mb-4 text-start">About this League</h2>
+        <p className="text-sky-900 dark:text-white/80 leading-relaxed text-start">{league.description || 'No description available.'}</p>
       </Card>
 
       {/* Join League Button - Only show for regular users */}
       {showJoinButton && (
         <div className="flex justify-center pt-4">
           <Button 
-            className="bg-mint hover:bg-mint/90 text-forest px-8 py-6 text-lg"
+            className="bg-sky-900 dark:bg-mint dark:hover:bg-mint/90 text-gray-100 dark:text-forest px-8 py-6 text-lg"
             onClick={handleJoinLeague}
           >
             <Shield className="mr-2 h-5 w-5" />

@@ -27,7 +27,7 @@ export const PasswordInput = ({ value, onChange, error }: PasswordInputProps) =>
 
   return (
     <div className="text-left">
-      <label htmlFor="password" className="block text-sm font-medium text-mint/80">
+      <label htmlFor="password" className="block text-sm font-medium text-sky-900 dark:text-mint/80">
         Password
       </label>
       <div className="relative">
@@ -37,14 +37,14 @@ export const PasswordInput = ({ value, onChange, error }: PasswordInputProps) =>
           required
           value={value}
           onChange={handleChange}
-          className="mt-1 bg-forest-light/50 backdrop-blur-md border border-mint/10 focus:border-mint/20 text-white placeholder-mint/30 focus:ring-mint/20 pr-10"
+          className="mt-1 bg-gray-100 dark:bg-forest-light/50 backdrop-blur-md border dark:border-mint/10 dark:focus:border-mint/20 text-sky-900 dark:text-white dark:placeholder-mint/30 dark:focus:ring-mint/20 pr-10"
           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$"
           title="Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character"
         />
         <button
           type="button"
           onClick={() => setShowPassword(!showPassword)}
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-mint/60 hover:text-mint focus:outline-none"
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sky-900 dark:text-mint/60 dark:hover:text-mint focus:outline-none"
         >
           {showPassword ? (
             <EyeOff className="h-4 w-4" />

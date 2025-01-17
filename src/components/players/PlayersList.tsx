@@ -71,7 +71,7 @@ export const PlayersList = ({ players, onPlayerClick, isLoading, viewMode = "lea
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {[...Array(6)].map((_, index) => (
-          <div key={index} className="bg-forest-light/30 rounded-lg p-4">
+          <div key={index} className="bg-gray-200 dark:bg-forest-light/30 rounded-lg p-4">
             <div className="flex items-center space-x-4">
               <Skeleton className="h-16 w-16 rounded-full" />
               <div className="space-y-2 flex-1">
@@ -88,9 +88,9 @@ export const PlayersList = ({ players, onPlayerClick, isLoading, viewMode = "lea
   if (!players || players.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-12 px-4">
-        <UsersRound className="h-16 w-16 text-mint/40 mb-4" />
-        <h3 className="text-xl font-semibold text-mint mb-2">No Players Found</h3>
-        <p className="text-white/60 text-center max-w-md">
+        <UsersRound className="h-16 w-16 text-sky-900 dark:text-mint/40 mb-4" />
+        <h3 className="text-xl font-semibold text-sky-900 dark:text-mint mb-2">No players found</h3>
+        <p className="text-gray-500 dark:text-white/60 text-center max-w-md">
           Try adjusting your filters or search criteria to find the players you're looking for.
         </p>
       </div>
@@ -118,8 +118,8 @@ export const PlayersList = ({ players, onPlayerClick, isLoading, viewMode = "lea
             <Star
               className={`h-5 w-5 ${
                 favorites.includes(player.player_id)
-                  ? "text-yellow-400 fill-yellow-400"
-                  : "text-white/60 hover:text-white/80"
+                  ? "text-yellow-500 fill-yellow-500 dark:text-yellow-400 dark:fill-yellow-400"
+                  : "text-sky-900 dark:text-white/60 dark:hover:text-white/80"
               }`}
             />
           </Button>

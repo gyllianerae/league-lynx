@@ -107,10 +107,10 @@ export function PlayerTeams({ playerId }: { playerId: string }) {
   }
 
   return (
-    <Card className="bg-forest-light/50 backdrop-blur-xl p-6 border border-mint/10 hover:border-mint/20 transition-all duration-300 shadow-lg h-full">
+    <Card className="bg-gray-100 dark:bg-forest-light/50 backdrop-blur-xl p-6 border dark:border-mint/10 dark:hover:border-mint/20 transition-all duration-300 shadow-lg h-full">
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h3 className="text-xl font-semibold text-mint flex items-center gap-2">
+          <h3 className="text-xl font-semibold text-sky-900 dark:text-mint flex items-center gap-2">
             <Users className="h-5 w-5" />
             Teams & Leagues
           </h3>
@@ -118,28 +118,28 @@ export function PlayerTeams({ playerId }: { playerId: string }) {
             value={filterType}
             onValueChange={setFilterType}
           >
-            <SelectTrigger className="w-[140px] bg-forest-light/50 border-mint/10 text-mint">
+            <SelectTrigger className="w-[140px] bg-gray-100 text-sky-900 dark:bg-forest-light/50 dark:border-mint/10 dark:text-mint">
               <SelectValue placeholder="Filter teams" />
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Teams</SelectItem>
-              <SelectItem value="my-teams">My Teams</SelectItem>
+            <SelectContent className="bg-gray-100 text-sky-900 dark:bg-forest-light/50 dark:border-mint/10 dark:text-mint">
+              <SelectItem value="all" className="hover:bg-gray-200 hover:cursor-pointer">All Teams</SelectItem>
+              <SelectItem value="my-teams" className="hover:bg-gray-200 hover:cursor-pointer">My Teams</SelectItem>
             </SelectContent>
           </Select>
         </div>
 
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-mint/40 h-4 w-4" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-sky-900 dark:text-mint/40 h-4 w-4" />
           <Input
             placeholder="Search teams or leagues..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 bg-forest-light/50 border-mint/10 text-mint"
+            className="pl-10 bg-gray-100 text-sky-900 dark:bg-forest-light/50 dark:border-mint/10 dark:text-mint"
           />
         </div>
 
         {filteredTeams?.length === 0 ? (
-          <div className="text-center py-8 text-white/60">
+          <div className="text-center py-8 text-sky-900 dark:text-white/60">
             No teams found with this player
           </div>
         ) : (
